@@ -1,0 +1,27 @@
+[
+  {
+    "source": "/antigo/especial",
+    "target": "/especial.html",
+    "status": "301"
+  },
+  {
+    "source": "/antigo/<*>",
+    "target": "/projetos.html",
+    "status": "301"
+  },
+  {
+    "source": "/campanha",
+    "target": "/projetos.html",
+    "status": "302"
+  },
+  {
+    "source": "/fale-comigo",
+    "target": "/contato.html",
+    "status": "200"
+  },
+  {
+    "source": "/<*>",
+    "target": "/404.html",
+    "status": "404"
+  }
+]

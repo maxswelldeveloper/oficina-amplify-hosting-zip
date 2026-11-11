@@ -1,0 +1,270 @@
+[
+  {
+    "name": "Publicar",
+    "time": "10 min",
+    "title": "Publique o site no Amplify.",
+    "intro": "Vamos colocar um portfólio pronto na internet. Você vai enviar o ZIP e receber um endereço para acessá-lo.",
+    "check": "o endereço fornecido pelo Amplify abrir o portfólio com a marca v1.",
+    "download": "aluno/pacotes/laboratorio-v1.zip",
+    "downloadLabel": "Baixar site pronto · v1 ↓",
+    "choice": "O Amplify recebe os arquivos prontos para exibir. Se um projeto precisar de compilação, ela deve acontecer antes de gerar o ZIP. Neste exercício, não há comando de build para configurar.",
+    "action": "No console AWS, abra Amplify → Create new app → Deploy without Git. Use o nome oficina-seu-nome e a branch production. Escolha Drag and drop, envie laboratorio-v1.zip e clique em Save and deploy. Os nomes das ações podem variar na interface.",
+    "challenge": "Confira o conteúdo do ZIP: index.html deve estar na raiz, e não dentro de outra pasta.",
+    "phases": [
+      [
+        "Você já tem o site pronto.",
+        "O arquivo laboratorio-v1.zip contém as páginas do portfólio. O Amplify vai hospedá-las para que outras pessoas possam acessá-las.",
+        [
+          "Nesta oficina",
+          "Baixar o ZIP"
+        ],
+        [
+          "Baixe o ZIP pelo botão abaixo.",
+          "Abra o ZIP e encontre index.html.",
+          "Mantenha o arquivo compactado para o envio."
+        ]
+      ],
+      [
+        "Envie o ZIP ao Amplify.",
+        "Agora saia desta oficina e faça a publicação no console da AWS.",
+        [
+          "AWS Amplify",
+          "Create new app",
+          "Deploy without Git"
+        ],
+        [
+          "Crie a aplicação oficina-seu-nome, com branch production.",
+          "Em Drag and drop, selecione laboratorio-v1.zip.",
+          "Clique em Save and deploy e aguarde a conclusão."
+        ]
+      ],
+      [
+        "Abra o endereço publicado.",
+        "A publicação está pronta quando o site abre pelo link da aplicação.",
+        [
+          "Sua aplicação",
+          "URL publicada"
+        ],
+        [
+          "No Amplify, abra a URL da aplicação.",
+          "Confira a marca v1 no topo da página.",
+          "Guarde esse endereço: usaremos o mesmo nas próximas etapas."
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "Endereços",
+    "time": "20 min / 18 min",
+    "title": "Faça um link antigo abrir a página certa.",
+    "intro": "O link /antigo/especial está abrindo a lista geral, quando deveria abrir um projeto em destaque. Vamos provocar o erro, descobrir a regra responsável e corrigir o destino.",
+    "check": "/antigo/especial abrir a página Projeto em destaque, sem cair na lista geral de projetos.",
+    "download": "configuracoes/regras-corretas.json",
+    "downloadLabel": "Baixar regras para o Amplify ↓",
+    "choice": "Um redirecionamento envia o visitante para outro endereço: 301 indica mudança permanente e 302, temporária. Uma reescrita 200 entrega o conteúdo de um arquivo sem mudar o endereço mostrado. A regra 404 mostra nossa página de erro quando não há recurso no caminho pedido.",
+    "action": "Na simulação, selecione a ordem com conflito e observe a regra destacada. Na aplicação real, abra Rewrites and redirects, guarde a configuração atual e coloque a regra específica antes da geral. O conjunto regras-corretas.json serve de referência. Salve e repita o mesmo acesso; confira destino, status e conteúdo no navegador.",
+    "challenge": "Investigar faz parte desta etapa: observar a resposta errada, identificar a regra que a explica, corrigir e repetir o acesso. Registros de outros visitantes podem ajudar em uma investigação futura; a consulta opcional fica recolhida em Por que fazemos isso?. Não é preciso abrir CSV nem executar uma atividade separada de logs.",
+    "phases": [
+      [
+        "Provoque e observe o erro.",
+        "Comece pela situação que o visitante vê. O problema está no destino escolhido para um link antigo.",
+        [
+          "Aqui na oficina",
+          "Simulação"
+        ],
+        [
+          "Mantenha /antigo/especial e escolha Os links antigos vêm primeiro.",
+          "Observe que o destino vira /projetos.html, em vez de /especial.html.",
+          "Anote: o endereço existe, mas a resposta leva ao lugar errado."
+        ]
+      ],
+      [
+        "Descubra qual regra foi usada.",
+        "Antes de reenviar arquivos, procure a regra que explica esse resultado.",
+        [
+          "Rewrites and redirects",
+          "Ordem das regras"
+        ],
+        [
+          "Abra Ver quais regras estão sendo testadas e encontre a linha destacada.",
+          "A regra geral /antigo/<*> aparece antes da regra específica: ela vence primeiro.",
+          "No console Amplify, confira se suas regras estão nessa ordem; guarde a configuração atual antes de editar."
+        ]
+      ],
+      [
+        "Corrija e repita o mesmo acesso.",
+        "A solução precisa mudar a resposta que você acabou de observar.",
+        [
+          "Amplify",
+          "Salvar regras",
+          "Testar novamente"
+        ],
+        [
+          "Baixe o conjunto correto e coloque /antigo/especial antes de /antigo/<*> no console.",
+          "Salve e abra sua URL publicada seguida de /antigo/especial: o destino deve ser /especial.html.",
+          "Confira também /fale-comigo e /nao-existe; use sessão limpa se um 301 anterior persistir."
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "Exibição externa",
+    "time": "10 min · demonstração extra de 90 min",
+    "title": "Outro site está mostrando seu portfólio.",
+    "intro": "Imagine seu perfil dentro de uma página com a marca de outra pessoa. O visitante continua naquele site, mesmo vendo seu conteúdo. Vamos comparar essa exibição antes e depois de restringi-la.",
+    "check": "o perfil continuar abrindo diretamente e o navegador recusar sua exibição no site de teste, após aplicar a restrição.",
+    "download": "aluno/pacotes/laboratorio-v1-com-cabecalhos.zip",
+    "downloadLabel": "Baixar v1 com restrição de iframe ↓",
+    "choice": "Este é um exemplo opcional de configuração de cabeçalhos no Amplify. Um iframe permite mostrar um site dentro de outro. A regra Content-Security-Policy: frame-ancestors 'self' permite incorporação pelo próprio site e impede outros sites de fazerem isso. Ela não impede acesso direto, não protege contra cópia dos arquivos e não substitui login.",
+    "action": "Primeiro, abra o teste externo e carregue a URL do portfólio v1, antes da restrição. Depois publique laboratorio-v1-com-cabecalhos.zip na mesma aplicação. Recarregue o teste e compare. Este pacote mantém o conteúdo v1 e acrescenta customHttp.yml. Se a exibição já estiver bloqueada antes, confira os cabeçalhos existentes em vez de atribuir o bloqueio à nova configuração.",
+    "challenge": "A decisão que queremos ensinar é onde configurar uma regra de exibição do site. O objetivo não é tratar iframe como defeito ou proteção obrigatória para todo portfólio. No percurso de 60 minutos, pule esta demonstração.",
+    "phases": [
+      [
+        "Veja o problema antes de configurar.",
+        "No exemplo, alguém apresenta seu portfólio dentro de outro site. O endereço na barra continua sendo o desse outro site.",
+        [
+          "Teste externo",
+          "Antes da restrição"
+        ],
+        [
+          "Abra o teste pelo botão à direita e cole a URL publicada na etapa 1.",
+          "Clique em Carregar no iframe e observe se o portfólio aparece.",
+          "Compare com Abrir link diretamente: são duas formas de acessar a mesma página."
+        ]
+      ],
+      [
+        "Restrinja a exibição em outros sites.",
+        "Vamos manter o portfólio público e impedir apenas que outro site o coloque dentro de um iframe.",
+        [
+          "Amplify",
+          "Mesma aplicação",
+          "Nova publicação manual"
+        ],
+        [
+          "Baixe a v1 com restrição pelo botão abaixo.",
+          "Publique esse ZIP na aplicação existente; o conteúdo continua sendo v1.",
+          "O arquivo customHttp.yml pede ao Amplify que envie a regra junto da resposta."
+        ]
+      ],
+      [
+        "Compare com o primeiro teste.",
+        "Agora repita exatamente o acesso feito antes. Você deve observar a mudança no iframe, não no conteúdo do portfólio.",
+        [
+          "Teste externo",
+          "Depois da publicação"
+        ],
+        [
+          "Recarregue a URL no teste e veja se o navegador bloqueia o iframe.",
+          "Abra o link diretamente: o portfólio deve continuar acessível.",
+          "No Console e no Network, confira se a causa é a regra frame-ancestors, e não outro erro."
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "Atualizar",
+    "time": "10 min / 9 min",
+    "title": "Publique a v2 e volte à v1.",
+    "intro": "Vamos trocar os arquivos do site e depois recuperar a versão anterior, usando a mesma aplicação.",
+    "check": "a página mostrar VERSÃO 2 após o novo envio e voltar à marca v1 após a recuperação.",
+    "download": "aluno/pacotes/recuperacao-v1.zip",
+    "downloadLabel": "Baixar versão anterior · v1 ↓",
+    "choice": "Cada ZIP guarda os arquivos daquela versão. Reenviar um pacote anterior recupera esses arquivos, mas não restaura as regras de endereço que você mudou no console. Registre essas configurações separadamente e confira os cabeçalhos efetivos depois da publicação.",
+    "action": "Abra a aplicação e a branch já utilizadas. Use a ação de nova publicação manual exibida no console. Envie laboratorio-v2.zip e depois recuperacao-v1.zip. Não crie outra aplicação. O pacote v2 pode ser baixado pelo botão da ilustração ou em Anotações e materiais.",
+    "challenge": "Depois de recuperar v1, abra /antigo/especial. As regras salvas na etapa 2 ainda precisam funcionar. Confira também os cabeçalhos: não suponha que todo ajuste anterior foi desfeito.",
+    "phases": [
+      [
+        "Guarde uma cópia antes de atualizar.",
+        "Você tem dois pacotes: v1 é o site inicial; v2 tem uma página inicial diferente.",
+        [
+          "Aqui na oficina",
+          "Comparação ilustrativa"
+        ],
+        [
+          "Clique em Publicação v2 e Recuperar v1 à direita.",
+          "Observe a troca dos arquivos no desenho.",
+          "As regras do console não fazem parte dessa troca."
+        ]
+      ],
+      [
+        "Envie a v2 e recupere a v1.",
+        "A comparação à direita é ilustrativa. Faça os envios reais na aplicação que já existe no Amplify.",
+        [
+          "Sua aplicação",
+          "Nova publicação manual"
+        ],
+        [
+          "Baixe o ZIP v2 pelo botão à direita e publique-o.",
+          "Aguarde e confira VERSÃO 2 na página inicial.",
+          "Baixe a v1 pelo botão abaixo e publique-a novamente."
+        ]
+      ],
+      [
+        "Confira a versão e os endereços.",
+        "A recuperação termina depois de conferir a página e as configurações usadas para acessá-la.",
+        [
+          "Seu site publicado",
+          "Verificação"
+        ],
+        [
+          "Abra a página inicial e confira a marca v1.",
+          "Teste /antigo/especial: a regra da etapa 2 deve continuar funcionando.",
+          "Confira os cabeçalhos recebidos e registre o resultado."
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "Personalizar",
+    "time": "30 min / 20 min",
+    "title": "Crie e publique seu próprio portfólio.",
+    "intro": "Agora você vai personalizar a página e usar o Amplify para publicar o seu resultado.",
+    "check": "outra pessoa conseguir abrir sua página e você tiver salvo o ZIP público e o backup editável.",
+    "download": "aluno/GUIA-RAPIDO.html",
+    "downloadLabel": "Baixar guia da oficina ↓",
+    "choice": "O ZIP público contém as páginas prontas para hospedar. O backup editável contém o editor e suas escolhas para continuar depois. São arquivos com finalidades diferentes. Importe apenas backups criados por você ou de fonte confiável.",
+    "action": "Abra Personalizar meu site. Preencha nome, foto, links e projetos; ajuste cores e aparência. Salve o backup em Salvar e retomar edição. Baixe o ZIP e publique no Amplify. Voltar à oficina mantém a edição enquanto esta página permanece aberta.",
+    "challenge": "Peça a outra dupla para abrir sua URL e testar um endereço antigo configurado na etapa 2. Explique por que escolheu esse destino antes da votação.",
+    "phases": [
+      [
+        "Escolha o que quer mostrar.",
+        "O editor já está pronto. Você pode experimentar sem escrever a estrutura da página novamente.",
+        [
+          "Editor",
+          "Personalização"
+        ],
+        [
+          "Abra Personalizar meu site e experimente um dos quatro modelos.",
+          "Preencha nome, foto, links e projetos; personalize os títulos.",
+          "Em Composição e seções, escolha o layout e mova ou oculte as seções."
+        ]
+      ],
+      [
+        "Salve a edição e publique o resultado.",
+        "Guarde os dois arquivos para poder publicar agora e continuar editando depois.",
+        [
+          "Editor",
+          "Downloads"
+        ],
+        [
+          "Em Salvar e retomar edição, baixe o backup editável.",
+          "Clique em Baixar meu ZIP para gerar o site público.",
+          "Envie esse ZIP à sua aplicação no Amplify."
+        ]
+      ],
+      [
+        "Peça a alguém para testar.",
+        "Sua entrega é a página publicada, acompanhada de uma decisão que você sabe explicar.",
+        [
+          "Página publicada",
+          "Verificação em dupla"
+        ],
+        [
+          "Compartilhe a URL e confira se a outra pessoa consegue abrir.",
+          "Demonstre um redirecionamento e uma página inexistente.",
+          "Envie a URL para a votação organizada pela turma."
+        ]
+      ]
+    ]
+  }
+]

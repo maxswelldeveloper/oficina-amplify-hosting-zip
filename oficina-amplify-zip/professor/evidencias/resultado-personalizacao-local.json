@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "checks": [
+    "quatro modelos",
+    "preservação de conteúdo",
+    "três composições",
+    "escala de nome",
+    "formato e visibilidade do retrato",
+    "densidade",
+    "títulos e textos",
+    "ordem e visibilidade das seções",
+    "sincronização dos controles de projetos",
+    "exportação ZIP",
+    "backup e restauração sem duplicar controles",
+    "edição após importar",
+    "modelos e composições mobile"
+  ],
+  "errors": []
+}

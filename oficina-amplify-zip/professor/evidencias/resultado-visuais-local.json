@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "scope": "Teste local com duas origens HTTP e CSP real; nenhuma chamada AWS.",
+  "checks": [
+    "iframe estado vazio",
+    "carregamento real",
+    "acesso direto em outra aba",
+    "bloqueio CSP real entre origens",
+    "interface sem detecção automática falsa",
+    "iframe e editor mobile",
+    "tema inicial consistente",
+    "fundo escuro personalizável"
+  ],
+  "consoleEvidence": [
+    "Framing 'http://127.0.0.1:42245/' violates the following Content Security Policy directive: \"frame-ancestors 'self'\". The request has been blocked.\n"
+  ],
+  "errors": []
+}

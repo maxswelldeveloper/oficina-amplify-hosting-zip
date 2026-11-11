@@ -1,0 +1,6 @@
+origem,timestamp_utc,caminho,status,observacao
+SINTETICO,2026-11-11T10:00:00Z,/,200,pagina inicial
+SINTETICO,2026-11-11T10:01:00Z,/curriculo,404,link sem destino
+SINTETICO,2026-11-11T10:02:00Z,/curriculo,404,segunda tentativa
+SINTETICO,2026-11-11T10:03:00Z,/fale-comigo,200,conferir corpo
+SINTETICO,2026-11-11T10:04:00Z,/favicon.ico,404,recurso ausente

@@ -1,0 +1,2802 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Monte uma página com sua identidade, seus favoritos e seus projetos." />
+  <title>Meu espaço — Studio</title>
+  <style data-export-style>/* PERSONALIZE: as cores do Studio e as medidas gerais começam aqui. */
+:root {
+  color-scheme: dark;
+  --studio-accent: #c7fa62;
+  --page: #090a0b;
+  --panel: #111315;
+  --line: #2a2e31;
+  --ink: #f0f1ef;
+  --muted: #a1a7aa;
+  --font: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+button, input, textarea, select {
+  font: inherit;
+}
+button, summary {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+}
+button {
+  color: inherit;
+}
+button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+input, textarea, select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #363c40;
+  border-radius: 7px;
+  padding: 10px 11px;
+  background: #191c1f;
+  color: var(--ink);
+  font-size: .82rem;
+}
+textarea {
+  resize: vertical;
+}
+input::placeholder, textarea::placeholder {
+  color: #969ca0;
+}
+input[type="file"] {
+  font-size: .72rem;
+  padding: 8px;
+}
+input::file-selector-button {
+  margin-right: 8px;
+  border: 0;
+  border-radius: 4px;
+  padding: 6px 8px;
+  background: #303639;
+  color: var(--ink);
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--studio-accent);
+}
+:focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--studio-accent);
+  color: #111;
+}
+h1, h2, h3, h4, p, a {
+  overflow-wrap: anywhere;
+}
+.studio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 84px;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--line);
+}
+.studio-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -.05em;
+}
+.brand-symbol {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--studio-accent);
+  color: #0c1007;
+  font-size: 1.2rem;
+}
+.studio-tag {
+  margin-left: 9px;
+  border-left: 1px solid #42474b;
+  padding-left: 15px;
+  color: var(--muted);
+  font-family: monospace;
+  font-size: .66rem;
+  letter-spacing: .12em;
+}
+.studio-actions {
+  display: flex;
+  gap: 10px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 10px 14px;
+  font-size: .8rem;
+  font-weight: 700;
+  transition: background 160ms, transform 160ms;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button-accent {
+  background: var(--studio-accent);
+  color: #142007;
+}
+.button-quiet {
+  border-color: #3e4448;
+  background: transparent;
+}
+.button-quiet:hover {
+  background: #202529;
+}
+.studio-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  align-items: start;
+  gap: 30px;
+  max-width: 1660px;
+  margin: auto;
+  padding: 30px 32px 70px;
+}
+.editor {
+  min-width: 0;
+}
+.editor-heading {
+  padding: 5px 0 21px;
+}
+.label {
+  margin: 0;
+  font-family: monospace;
+  font-size: .65rem;
+  letter-spacing: .12em;
+}
+.editor-heading .label {
+  color: var(--studio-accent);
+  font-size: .6rem;
+}
+.editor-heading h1 {
+  margin: 10px 0;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+.editor-heading h1 span {
+  color: var(--studio-accent);
+}
+.editor-heading > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.editor-section {
+  margin-bottom: 10px;
+  border: 1px solid #30363a;
+  border-radius: 9px;
+  background: var(--panel);
+}
+.editor-section > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-size: .83rem;
+  font-weight: 700;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.editor-section summary b {
+  margin-right: 10px;
+  color: var(--studio-accent);
+  font-family: monospace;
+  font-size: .7rem;
+}
+.accordion-icon {
+  color: var(--muted);
+  font-size: 1.2rem;
+  transition: transform 160ms;
+}
+.editor-section[open] .accordion-icon {
+  transform: rotate(45deg);
+}
+.editor-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 3px 15px 18px;
+}
+.editor-fields label, .field-label {
+  margin: 8px 0 0;
+  color: #c0c6c9;
+  font-size: .72rem;
+}
+.field-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.field-pair label {
+  display: block;
+  margin-bottom: 8px;
+}
+.checkbox-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.text-button {
+  align-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--studio-accent);
+  font-size: .72rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.accent-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+.accent-picker > button {
+  width: 29px;
+  height: 29px;
+  border: 3px solid var(--panel);
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 1px #50585d;
+}
+.accent-picker > button[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px #f1f1f1;
+}
+.custom-color {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0 !important;
+}
+.custom-color input {
+  width: 30px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.editor-note {
+  padding: 6px 10px;
+  color: var(--muted);
+  font-size: .73rem;
+}
+.canvas {
+  min-width: 0;
+}
+.canvas-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: .62rem;
+  letter-spacing: .09em;
+  color: var(--muted);
+}
+.canvas-heading > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--studio-accent);
+}
+/* PERSONALIZE: o editor altera estas propriedades apenas no perfil. */
+.profile {
+  --profile-background: #111412;
+  --profile-text: #f0f1ed;
+  --profile-muted: #b8c1ba;
+  --accent: #c7fa62;
+  --accent-ink: #142007;
+  --card-radius: 12px;
+  --name-font: Arial, Helvetica, sans-serif;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #333b36;
+  border-radius: 14px;
+  background-color: var(--profile-background);
+  padding: 28px clamp(22px, 4vw, 52px) 25px;
+  color: var(--profile-text);
+}
+.profile[data-background="grid"] {
+  background-image: linear-gradient(#ffffff04 1px, transparent 1px), linear-gradient(90deg, #ffffff04 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.profile[data-background="dots"] {
+  background-image: radial-gradient(#ffffff20 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.profile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto auto;
+  width: 65%;
+  height: 380px;
+  background: radial-gradient(ellipse at 100% 0, color-mix(in srgb, var(--accent) 10%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.profile :focus-visible {
+  outline-color: var(--accent);
+}
+.profile-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ffffff15;
+}
+.profile-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 800;
+}
+.profile-logo .label {
+  color: #929c93;
+  font-size: .55rem;
+}
+.mini-mark {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+.profile-coordinate {
+  color: #9aaba0;
+  font-family: monospace;
+  font-size: .6rem;
+}
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  gap: 24px;
+  align-items: center;
+  padding: 58px 0 35px;
+}
+.hero-kicker {
+  margin: 0 0 17px;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: .65rem;
+  letter-spacing: .14em;
+}
+.profile h2 {
+  max-width: 780px;
+  margin: 0;
+  font-family: var(--name-font);
+  font-size: clamp(3.1rem, 5.8vw, 6.3rem);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+}
+.hero-bio {
+  max-width: 520px;
+  margin: 22px 0;
+  color: #b8c1ba;
+  font-size: .95rem;
+  line-height: 1.65;
+}
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  font-family: monospace;
+  font-size: .61rem;
+  color: #b5bfb7;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  border: 1px solid #ffffff20;
+  border-radius: 4px;
+}
+.status-pill i {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.portrait-frame {
+  position: relative;
+  width: 170px;
+  padding: 10px;
+  border: 1px solid #ffffff30;
+  transform: rotate(4deg);
+}
+.portrait {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: repeating-linear-gradient(-35deg, transparent 0 20px, #00000015 20px 21px), var(--accent);
+  color: var(--accent-ink);
+}
+.portrait > span {
+  font-size: 4.7rem;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.09em;
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portrait-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  font: .57rem monospace;
+  letter-spacing: .12em;
+  color: #b7c2b8;
+}
+.portrait-cross {
+  position: absolute;
+  color: var(--accent);
+  font: 1rem monospace;
+}
+.cross-one {
+  top: -11px;
+  left: -6px;
+}
+.cross-two {
+  bottom: -9px;
+  right: -6px;
+}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #ffffff25;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: .73rem;
+  text-decoration: none;
+  transition: color 160ms, border-color 160ms;
+}
+.profile-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 15px;
+}
+.section-heading .label {
+  color: #95a69a;
+  font-size: .56rem;
+}
+.section-heading h3 {
+  margin: 8px 0 0;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+.section-heading h3 span {
+  color: var(--accent);
+}
+.collection-count {
+  padding: 5px 8px;
+  border: 1px solid #ffffff25;
+  font: .58rem monospace;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.section-description {
+  margin: 0 0 22px;
+  color: #a5b0a8;
+  font-size: .78rem;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+}
+.collection-item {
+  min-width: 0;
+  position: relative;
+}
+.collection-card {
+  overflow: hidden;
+  border: 1px solid #ffffff20;
+  border-radius: var(--card-radius);
+  background: #191d1a;
+  transition: border-color 180ms, transform 180ms;
+}
+.collection-card > summary {
+  list-style: none;
+}
+.card-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #252d22;
+}
+.card-visual::before, .card-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.card-visual::before {
+  width: 62%;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: .65;
+}
+.card-visual::after {
+  inset: 0;
+  background: linear-gradient(transparent 65%, #00000040), repeating-linear-gradient(0deg, transparent 0 4px, #00000015 4px 5px);
+}
+.visual-game {
+  background: linear-gradient(150deg, #262134, #514266);
+}
+.visual-game::before {
+  width: 46%;
+  height: 82%;
+  border-radius: 70px 70px 0 0;
+  border-width: 3px;
+  transform: translateY(20%);
+}
+.visual-film {
+  background: radial-gradient(ellipse at 50% 90%, #b46132, #352622 65%);
+}
+.visual-film::before {
+  width: 120%;
+  transform: rotate(-30deg) scaleY(.35);
+}
+.visual-music {
+  background: radial-gradient(circle at 50% 50%, #49212b, #20191d);
+}
+.visual-music::before {
+  border-width: 18px;
+  box-shadow: 0 0 0 12px #ffffff08, 0 0 0 24px #ffffff06;
+}
+.card-mark {
+  position: relative;
+  z-index: 1;
+  color: var(--accent);
+  font-size: 3.6rem;
+  font-weight: 900;
+  font-family: monospace;
+  letter-spacing: -.12em;
+}
+.card-image {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-info {
+  padding: 16px;
+}
+.card-category {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent);
+  font: .55rem monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.card-title-row {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  justify-content: space-between;
+}
+.card-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.03em;
+}
+.card-open-icon {
+  color: var(--accent);
+  transition: transform 160ms;
+}
+.collection-card[open] .card-open-icon {
+  transform: rotate(90deg);
+}
+.card-details {
+  margin: 0 16px;
+  padding: 14px 0 18px;
+  border-top: 1px solid #ffffff15;
+}
+.card-details p {
+  margin: 0;
+  color: #b5c0b7;
+  font-size: .78rem;
+}
+.card-details a {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--accent);
+  font-size: .72rem;
+  text-underline-offset: 4px;
+}
+/* AULA: :hover é suficiente para a reação visual ao passar o mouse. */
+@media (hover: hover) {
+  .collection-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+  }
+}
+.remove-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid #778175;
+  border-radius: 50%;
+  background: #0d100ee8;
+  color: #e8eee6;
+  font-size: 1rem;
+}
+.collection-item > .remove-button {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  right: 9px;
+}
+.remove-button:hover {
+  border-color: #ffaaa5;
+  color: #ffaaa5;
+}
+.profile[data-layout="list"] .collection-grid {
+  grid-template-columns: 1fr;
+}
+.profile[data-layout="list"] .collection-card > summary {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: center;
+}
+.profile[data-layout="list"] .card-visual {
+  height: 115px;
+  aspect-ratio: auto;
+}
+.profile[data-layout="list"] .card-details {
+  margin-left: 156px;
+}
+.projects-section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid #ffffff18;
+}
+.section-mark {
+  color: var(--accent);
+  font-size: 2rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.project-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #ffffff20;
+  border-radius: var(--card-radius);
+  background: #191d1a;
+}
+.project-card .remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.project-number {
+  color: var(--accent);
+  font: .65rem monospace;
+}
+.project-card h4 {
+  margin: 20px 20px 10px 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+}
+.project-card p {
+  margin: 0;
+  color: #b5c0b7;
+  font-size: .78rem;
+}
+.project-card a {
+  display: inline-flex;
+  margin-top: 20px;
+  color: var(--accent);
+  font-size: .73rem;
+  text-underline-offset: 4px;
+}
+.empty-note {
+  margin: 0;
+  color: #a3ada5;
+  font-size: .75rem;
+}
+.profile-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 35px;
+  border-top: 1px solid #ffffff18;
+  padding-top: 20px;
+  color: #94a497;
+  font: .53rem monospace;
+  letter-spacing: .07em;
+}
+.profile-footer > span:last-child {
+  color: var(--accent);
+}
+.export-hint {
+  margin: 16px 0 0;
+  color: #a1a7aa;
+  text-align: center;
+  font-size: .73rem;
+}
+.feedback {
+  position: fixed;
+  z-index: 50;
+  bottom: 20px;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  transform: translateX(-50%);
+  margin: 0;
+  border: 1px solid #5b6654;
+  border-radius: 8px;
+  padding: 13px 18px;
+  background: #1c2519;
+  color: #eef4e8;
+  box-shadow: 0 10px 40px #0009;
+  font-size: .8rem;
+}
+.feedback:empty {
+  display: none;
+}
+.preview-mode .editor {
+  display: none;
+}
+.preview-mode .studio-shell {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1160px;
+}
+.preview-mode .profile h2 {
+  font-size: clamp(3.1rem, 7vw, 7rem);
+}
+.published-page {
+  padding: 30px;
+}
+.published-page .profile {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.published-page .editor-only {
+  display: none;
+}
+.published-page .profile h2 {
+  font-size: clamp(3.1rem, 7vw, 7rem);
+}
+@media (max-width: 1200px) {
+  .studio-shell {
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 20px;
+    padding: 25px 20px 50px;
+  }
+  .profile {
+    padding: 24px;
+  }
+  .profile-hero {
+    grid-template-columns: minmax(0, 1fr) 130px;
+  }
+  .portrait-frame {
+    width: 130px;
+  }
+  .portrait > span {
+    font-size: 3.7rem;
+  }
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .studio-header {
+    padding: 15px 20px;
+  }
+  .studio-tag {
+    display: none;
+  }
+  .studio-shell {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px 16px 50px;
+  }
+  .profile-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 35px;
+  }
+  .portrait-frame {
+    grid-row: 1;
+    width: 105px;
+  }
+  .portrait > span {
+    font-size: 3rem;
+  }
+  .profile h2 {
+    font-size: 3.5rem;
+  }
+  .collection-grid, .project-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-logo .label, .canvas-heading > span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .studio-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding: 17px;
+  }
+  .studio-actions {
+    justify-content: space-between;
+  }
+  .studio-actions .button {
+    flex: 1;
+    gap: 10px;
+    padding: 10px;
+    font-size: .72rem;
+  }
+  .studio-shell {
+    grid-template-columns: 1fr;
+    padding: 22px 14px 45px;
+    gap: 25px;
+  }
+  .editor-heading {
+    padding-top: 0;
+  }
+  .profile {
+    padding: 24px 20px;
+  }
+  .profile-hero {
+    grid-template-columns: 1fr;
+  }
+  .profile h2 {
+    font-size: clamp(2.6rem, 11vw, 4rem);
+  }
+  .profile-topbar .label {
+    display: block;
+  }
+  .hero-bio {
+    font-size: .85rem;
+  }
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile[data-layout="list"] .collection-card > summary {
+    grid-template-columns: 95px minmax(0, 1fr);
+  }
+  .profile[data-layout="list"] .card-details {
+    margin-left: 16px;
+  }
+  .profile[data-layout="list"] .card-info {
+    padding: 12px;
+  }
+  .profile[data-layout="list"] .card-mark {
+    font-size: 2.5rem;
+  }
+  .published-page {
+    padding: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}
+
+/* Linguagens: etiquetas simples que acompanham o perfil exportado. */
+.languages-section { margin-bottom: 32px; }
+.language-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.language-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid currentColor; border-radius: 6px; padding: 7px 12px; font-family: "Courier New", monospace; font-size: .85rem; max-width: 100%; }
+.language-name { overflow-wrap: anywhere; }
+.language-tag .remove-button { position: static; }
+.profile .hero-bio, .profile .profile-meta, .profile .profile-coordinate, .profile .profile-topbar .label, .profile .section-description, .profile .profile-footer, .profile .languages-section .label, .profile .empty-note { color: var(--profile-muted); }
+.profile[data-tone="light"] .hero-kicker, .profile[data-tone="light"] .section-heading .label, .profile[data-tone="light"] .section-heading h3 span, .profile[data-tone="light"] .collection-count, .profile[data-tone="light"] .section-mark, .profile[data-tone="light"] .profile-footer span { color: var(--profile-text); }
+.profile[data-tone="light"] .status-pill { color: var(--profile-text); }
+.collection-card, .project-card { color: #f0f1ed; }
+
+/* Exportação alternativa para ambientes que bloqueiam downloads. */
+.export-dialog {
+  background: #161b1e;
+  color: #f0f1ed;
+  border: 1px solid #48534b;
+  border-radius: 16px;
+  padding: 24px;
+  width: min(600px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+}
+.export-dialog::backdrop { background: #000b; }
+.export-dialog p { margin: 16px 0; line-height: 1.6; }
+.export-dialog label { display: block; margin-bottom: 8px; }
+.export-dialog textarea { width: 100%; font-family: monospace; }
+.export-dialog-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* Interface da oficina e perfil inicial. As escolhas do aluno continuam nas variáveis do perfil. */
+:root{color-scheme:light;--studio-accent:#ff9900;--page:#f5f6f8;--panel:#fff;--line:#e2e7ee;--ink:#172b45;--muted:#67768a;--font:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{-webkit-font-smoothing:antialiased}.studio-header{max-width:1580px;margin:auto;padding:22px 32px;border-bottom:1px solid var(--line);gap:20px}.studio-brand{font-size:17px;font-weight:650;letter-spacing:-.035em}.brand-symbol{background:#172b45;color:#ff9900;border-radius:10px;width:34px;height:34px}.studio-tag{font:11px var(--font);letter-spacing:0;border-color:#d7dee6}.studio-actions{flex-wrap:wrap;align-items:center;justify-content:flex-end}.button{border-radius:11px;gap:8px;font-weight:550;font-size:12px;padding:11px 15px}.button:hover{transform:none}.button-accent{background:#172b45;color:#fff}.button-quiet{background:#e9eef4;border:0;color:#34475f}.button-quiet:hover{background:#dde6ef}.studio-workflow{max-width:1516px;margin:24px auto 0;display:flex;gap:26px;padding:0 32px;font-size:12px;color:#68778b}.studio-workflow span{display:flex;align-items:center;gap:8px}.studio-workflow b{font-size:10px;font-weight:650;display:grid;place-items:center;width:21px;height:21px;border:1px solid #d6dfe9;border-radius:50%;color:#172b45}.studio-workflow span:first-child b{background:#ff9900;border-color:#ff9900}.studio-shell{grid-template-columns:310px minmax(0,1fr);gap:32px;padding:28px 32px 60px;max-width:1580px}.editor-heading{padding:4px 3px 20px}.editor-heading .label{color:#8d5910;font:650 10px var(--font);letter-spacing:.12em}.editor-heading h1{font-size:30px;font-weight:650;letter-spacing:-.05em;margin:12px 0}.editor-heading>p:last-child{font-size:13px;line-height:1.6}.editor-section{border-color:#e3e8ee;border-radius:15px;box-shadow:0 3px 12px #243b5503;overflow:hidden;margin-bottom:12px}.editor-section>summary{padding:16px 18px;font-size:13px;font-weight:550}.editor-section summary b{font:10px var(--font);color:#9a6616;margin-right:9px}.editor-fields{padding:0 18px 20px;gap:7px}.editor-fields label,.editor-fields .field-label{font-size:11px;color:#4e6075}.editor input,.editor textarea,.editor select{background:#fafbfd;color:#172b45;border:1px solid #dce3ec;border-radius:9px;padding:11px;font-size:12px}.editor input[type=file]{font-size:10px}.editor input::file-selector-button{border-radius:6px;background:#e9eef4;color:#31465e;font-size:10px}.editor input[type=color]{height:38px;padding:4px;cursor:pointer}.editor .custom-color input{width:30px;height:24px;padding:0;background:transparent;border:0}.editor .custom-color{font-size:10px}.editor input[type=checkbox]{padding:0;accent-color:#172b45}.editor input::placeholder,.editor textarea::placeholder{color:#8b98a8}.editor .accent-picker>button{width:26px;height:26px;border:3px solid white;box-shadow:0 0 0 1px #d6dfe8}.editor .accent-picker>button[aria-pressed=true]{box-shadow:0 0 0 2px #172b45}.text-button{color:#557491;font-size:11px;text-decoration:none}.canvas-heading{font:11px var(--font);letter-spacing:0;color:#687c91;align-items:center;padding:7px 2px;margin-bottom:15px}.live-dot{background:#69a588}.project-tools{border-top:1px solid #e0e6ed;padding:14px 2px 16px;margin-bottom:8px}.project-tools>summary{font-size:12px;list-style:none;color:#506882}.project-tools>summary:after{content:' +';float:right}.project-tools[open]>summary:after{content:' −'}.project-tools p{font-size:11px;color:#77859a;line-height:1.6;margin:12px 0}.project-tools #projectTools{display:flex;flex-wrap:wrap;gap:7px}.project-tools .button{font-size:11px;min-height:36px;padding:9px 10px}.project-tools input[type=file]{position:absolute;width:1px;height:1px;opacity:0;padding:0;border:0;overflow:hidden}.project-tools label{margin:0;cursor:pointer}.editor-note,.export-hint{font:11px/1.65 var(--font);color:#77869a}.export-hint{text-align:center;padding:9px}.profile{--profile-background:#fff;--profile-text:#172b45;--profile-muted:#697b8f;--accent:#ff9900;--accent-ink:#172438;--card-radius:18px;--name-font:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;border:1px solid color-mix(in srgb,var(--profile-text) 12%,transparent);border-radius:24px;box-shadow:0 12px 50px #172b4507;padding:30px clamp(24px,4vw,52px);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.profile[data-background=grid]{background-image:linear-gradient(color-mix(in srgb,var(--profile-text) 3%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--profile-text) 3%,transparent) 1px,transparent 1px)}.profile[data-background=dots]{background-image:radial-gradient(color-mix(in srgb,var(--profile-text) 13%,transparent) 1px,transparent 1px)}.profile::before{background:radial-gradient(ellipse at 100% 0,color-mix(in srgb,var(--accent) 8%,transparent),transparent 65%)}.profile h2,.published-page .profile h2,.preview-mode .profile h2{font-size:clamp(36px,4.5vw,68px);line-height:1.05;letter-spacing:-.065em;font-weight:650;text-transform:none}.profile-topbar{border-color:color-mix(in srgb,var(--profile-text) 10%,transparent);padding-bottom:22px}.profile-logo{font-weight:600;font-size:13px}.profile-logo .label,.profile-coordinate,.portrait-label{font-family:inherit;color:var(--profile-muted);font-size:9px;letter-spacing:.04em}.mini-mark{border-radius:6px;font-size:15px}.profile-hero{padding:44px 0 32px;grid-template-columns:minmax(0,1fr) 145px;gap:28px}.hero-kicker{color:var(--profile-muted);font-size:10px;letter-spacing:.1em}.hero-bio,.section-description{color:var(--profile-muted);font-size:14px;line-height:1.7}.profile-meta{font-size:11px;color:var(--profile-muted)}.status-pill{background:color-mix(in srgb,var(--profile-text) 4%,transparent);color:var(--profile-text);border-color:color-mix(in srgb,var(--profile-text) 10%,transparent)}.portrait-frame{width:145px}.portrait{border-radius:26px;box-shadow:none;border:1px solid color-mix(in srgb,var(--profile-text) 8%,transparent);background:color-mix(in srgb,var(--accent) 13%,var(--profile-background))}.portrait>span{font-weight:600;font-size:50px;color:var(--profile-text)}.portrait-cross{display:none}.portrait-label{margin-top:12px;text-align:center}.profile .label,.profile-footer,.collection-count{font-family:inherit;letter-spacing:.07em}.profile-links{gap:8px}.profile-link{font-size:12px;border-radius:9px;border-color:color-mix(in srgb,var(--profile-text) 12%,transparent);background:color-mix(in srgb,var(--profile-text) 3%,transparent)}.language-tag{border-radius:7px;font:10px var(--font);background:color-mix(in srgb,var(--profile-text) 4%,transparent);border-color:color-mix(in srgb,var(--profile-text) 10%,transparent);color:var(--profile-text)}.section-heading h3{font-size:25px;font-weight:600;letter-spacing:-.04em}.section-heading .label,.collection-count,.section-mark{color:var(--profile-muted)}.section-description{font-size:12px}.favorite-card,.project-card{background:color-mix(in srgb,var(--profile-text) 3%,var(--profile-background));border-color:color-mix(in srgb,var(--profile-text) 10%,transparent);box-shadow:none}.project-card h4{font-size:17px;font-weight:600;letter-spacing:-.025em}.project-card p,.project-number,.card-details p{color:var(--profile-muted)}.profile-footer{border-color:color-mix(in srgb,var(--profile-text) 10%,transparent);font-size:9px;color:var(--profile-muted)}.feedback{background:#172b45;color:white;border:1px solid #344a66;box-shadow:0 10px 30px #172b4520;font-size:12px;border-radius:12px}.published-page{padding:24px}.export-dialog{background:white;color:#172b45;border-color:#dce3ec;border-radius:20px}.export-dialog textarea{background:#f5f7fa;color:#172b45}.preview-mode .project-tools{display:none}@media(max-width:1100px){.studio-shell{grid-template-columns:280px minmax(0,1fr);gap:20px;padding:24px 20px}.studio-header{padding:20px}.studio-workflow{padding:0 20px}.profile{padding:25px}.profile-hero{grid-template-columns:minmax(0,1fr) 100px;gap:18px}.portrait-frame{width:100px}.portrait>span{font-size:36px}}@media(max-width:850px){.studio-shell{grid-template-columns:260px minmax(0,1fr);gap:16px;padding:20px 16px}.profile-hero{grid-template-columns:1fr}.portrait-frame{grid-row:1;width:90px}.profile h2{font-size:38px}.profile{padding:22px}.collection-grid,.project-grid{grid-template-columns:1fr}.profile-logo .label,.profile-coordinate{display:none}.studio-workflow{font-size:10px;gap:14px;padding:0 16px}.studio-tag{display:none}}@media(max-width:650px){.studio-header{padding:16px;gap:14px;align-items:stretch}.studio-actions{justify-content:stretch}.studio-workflow{gap:12px;font-size:10px;margin-top:20px;flex-wrap:wrap}.studio-shell{grid-template-columns:1fr;padding:22px 14px}.profile-hero{grid-template-columns:1fr}.profile h2{font-size:40px}.profile{padding:22px}.studio-actions .button{font-size:11px;flex:1}.canvas-heading{font-size:10px}.published-page{padding:12px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* Escolhas de composição e modelos. */
+.theme-presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:3px 0 8px}.theme-presets>button{padding:8px;border-radius:12px;border:1px solid #dfe5ed;background:#fafbfd;color:#172b45;text-align:left;min-width:0}.theme-presets>button[aria-pressed=true]{border-color:#172b45;box-shadow:0 0 0 1px #172b45}.theme-presets strong{display:block;font:550 12px var(--font);padding:7px 2px 0}.theme-presets small{font:10px var(--font);display:block;padding:3px 2px;color:#76859a}.theme-mini{height:77px;border-radius:7px;display:block;position:relative;overflow:hidden;border:1px solid #172b4510;padding:14px}.theme-mini b{font-size:25px;line-height:1;font-weight:550;letter-spacing:-.07em}.theme-mini i{position:absolute;width:21px;height:21px;border-radius:7px;right:12px;top:15px;background:#ff990033}.theme-mini em{display:block;width:55%;height:4px;border-radius:2px;background:currentColor;opacity:.16;margin-top:10px}.theme-mini.minimal{background:white;color:#172b45}.theme-mini.editorial{background:#f7f0e5;color:#783a25;font-family:Georgia,serif}.theme-mini.editorial i{background:#ab462f55;border-radius:50%}.theme-mini.terminal{background:#0b1720;color:#61d9bb;font-family:monospace}.theme-mini.terminal i{background:#61d9bb33;border-radius:0}.theme-mini.aurora{background:linear-gradient(130deg,#19152b,#413065);color:#d4c2ff}.theme-mini.aurora i{background:#b8a0ff66;border-radius:50%}.editor-fields .preset-hint{font:11px/1.65 var(--font);color:#76879a;margin:4px 0}.style-start>summary,.composition-options>summary,.section-copy-options>summary{font-size:12px}.section-order{display:grid;gap:7px}.section-order-row{display:flex;align-items:center;gap:6px;border:1px solid #e1e7ef;border-radius:9px;padding:8px 10px}.section-order-row>label{flex:1;min-width:0;font-size:11px;margin:0}.section-order-row>button{width:27px;height:27px;border:0;border-radius:7px;background:#edf2f7;color:#405973;font-size:14px;padding:0}.section-order-row>button:disabled{cursor:default;opacity:.3}.editor input[type=range]{padding:0;accent-color:#172b45;background:none;border:0;height:24px}.editor output{float:right;color:#7a8da3;font-size:10px}.profile{--card-radius:12px;--name-scale:1}.profile h2,.preview-mode .profile h2,.published-page .profile h2{font-size:clamp(30px,calc(4.5vw * var(--name-scale)),calc(68px * var(--name-scale)))}.profile[data-hero=center] .profile-hero{display:flex;flex-direction:column-reverse;text-align:center;gap:24px}.profile[data-hero=center] .hero-content{max-width:760px;align-self:center}.profile[data-hero=center] .profile-meta{justify-content:center}.profile[data-hero=center] .portrait-frame{width:130px}.profile[data-hero=center] .profile-hero .hero-bio{margin-left:auto;margin-right:auto}.profile[data-hero=compact] .profile-hero{grid-template-columns:82px minmax(0,1fr);padding-top:26px;padding-bottom:28px;gap:22px}.profile[data-hero=compact] .portrait-frame{grid-column:1;grid-row:1;width:82px}.profile[data-hero=compact] .hero-content{grid-column:2;min-width:0}.profile[data-hero=compact] .portrait>span{font-size:30px}.profile[data-hero=compact] .portrait-label{display:none}.profile[data-hero=compact] h2{font-size:clamp(28px,calc(3vw * var(--name-scale)),calc(48px * var(--name-scale)))}.profile[data-portrait=hidden] .profile-hero{grid-template-columns:1fr}.profile[data-portrait=hidden] .hero-content{grid-column:auto}.profile[data-photo-shape=circle] .portrait{border-radius:50%;transform:none}.profile[data-photo-shape=square] .portrait{border-radius:0;transform:none}.profile[data-photo-shape=soft] .portrait{border-radius:26px;transform:none}.profile[data-density=airy]>.languages-section,.profile[data-density=airy]>.collection-section,.profile[data-density=airy]>.projects-section{margin-bottom:55px;padding-top:14px}.profile[data-density=compact]>.languages-section,.profile[data-density=compact]>.collection-section,.profile[data-density=compact]>.projects-section{margin-bottom:20px;padding-top:0}.profile[data-density=compact] .profile-hero{padding-top:26px;padding-bottom:24px}.profile[data-theme-base=terminal] .hero-kicker,.profile[data-theme-base=terminal] .profile-logo,.profile[data-theme-base=terminal] .section-heading h3{font-family:monospace}.profile[data-theme-base=editorial] .section-heading h3{font-family:Georgia,serif;font-size:30px}.profile[data-theme-base=aurora]::before{height:650px;width:100%;background:radial-gradient(ellipse at 80% 0,color-mix(in srgb,var(--accent) 20%,transparent),transparent 65%)}@media(max-width:650px){.profile h2,.published-page .profile h2,.preview-mode .profile h2{font-size:calc(40px * var(--name-scale))}.profile[data-hero=compact] .profile-hero{grid-template-columns:65px minmax(0,1fr);gap:16px}.profile[data-hero=compact] .portrait-frame{width:65px}.profile[data-hero=compact] h2{font-size:calc(30px * var(--name-scale))}.profile[data-hero=compact] .profile-meta{font-size:10px}.theme-mini{height:90px}}
+.profile .project-card{color:var(--profile-text)}.profile .project-card a{color:var(--profile-text)}.profile .card-details{background:var(--profile-background);color:var(--profile-text)}.profile .card-details p{color:var(--profile-muted)}
+@media(min-width:851px){.studio-shell>.editor{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cdd8e4 transparent;padding-right:5px;overscroll-behavior-y:contain}.studio-shell>.canvas{align-self:start}}@media(max-width:650px){.studio-header{position:sticky;top:0;z-index:5;background:#f5f6f8f2;backdrop-filter:blur(16px)}}
+</style>
+
+</head>
+<body>
+  <header class="studio-header">
+    <a class="studio-brand" href="#studio"><span class="brand-symbol" aria-hidden="true">a/</span> Meu portfólio <span class="studio-tag">AMPLIFY LAB</span></a>
+    <div class="studio-actions">
+      <button id="previewButton" class="button button-quiet" type="button" aria-pressed="false">Ver meu perfil <span aria-hidden="true">↗</span></button>
+      <button id="exportButton" class="button button-accent" type="button">Baixar meu ZIP <span aria-hidden="true">↓</span></button>
+    </div>
+  </header>
+  <div class="studio-workflow" aria-label="Como concluir"><span><b>1</b> Personalize</span><span><b>2</b> Salve sua edição</span><span><b>3</b> Baixe e publique o ZIP</span></div><main class="studio-shell" id="studio">
+    <aside class="editor" aria-label="Personalizar meu perfil">
+      <div class="editor-heading"><p class="label">PERSONALIZE SEU PORTFÓLIO</p><h1>Comece por você<span>.</span></h1><p>Preencha os campos e acompanhe sua página na prévia.</p></div>
+<details class="project-tools"><summary>Salvar e retomar edição</summary><p>Backup editável: guarda esta edição. ZIP: leva as páginas prontas para o Amplify.</p><div id="projectTools"></div></details>      <!-- AULA: os campos com data-edit apontam para o elemento que será atualizado. -->
+      <details class="editor-section" open>
+        <summary><span><b>01</b> Identidade</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <div class="editor-fields">
+          <label for="nameInput">Nome ou apelido</label><input id="nameInput" data-edit="#profileName" maxlength="35" value="Alex Morgan" required />
+          <label for="roleInput">Como você se apresenta?</label><input id="roleInput" data-edit="#profileRole" maxlength="60" value="DESIGN • CÓDIGO • CULTURA DIGITAL" />
+          <label for="bioInput">Um pouco sobre você</label><textarea id="bioInput" data-edit="#profileBio" maxlength="240" rows="3">Coleciono referências, crio na internet e tenho mais abas abertas do que deveria.</textarea>
+          <div class="field-pair"><div><label for="locationInput">Cidade</label><input id="locationInput" data-edit="#profileLocation" maxlength="40" value="Recife, BR" /></div><div><label for="statusInput">Status</label><input id="statusInput" data-edit="#profileStatus" maxlength="45" value="Construindo meu próximo projeto" /></div></div>
+          <label for="avatarInput">Sua foto</label><input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+          <button id="removeAvatar" class="text-button" type="button">Usar minhas iniciais</button>
+        </div>
+      </details>
+      <details class="editor-section" open>
+        <summary><span><b>02</b> Aparência</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <div class="editor-fields">
+          <p class="field-label" id="accentLabel">Cor de destaque</p>
+          <div id="accentPicker" class="accent-picker" role="group" aria-labelledby="accentLabel">
+            <button type="button" data-accent="#ff9900" style="--swatch:#ff9900" aria-label="Laranja AWS" aria-pressed="true"></button>
+            <button type="button" data-accent="#ba9cff" style="--swatch:#ba9cff" aria-label="Violeta" aria-pressed="false"></button>
+            <button type="button" data-accent="#ff9c62" style="--swatch:#ff9c62" aria-label="Laranja" aria-pressed="false"></button>
+            <button type="button" data-accent="#68dce8" style="--swatch:#68dce8" aria-label="Ciano" aria-pressed="false"></button>
+            <label class="custom-color" for="accentInput">Outra<input id="accentInput" type="color" value="#ff9900" aria-label="Escolher outra cor de destaque" /></label>
+          </div>
+          <div class="field-pair"><div><label for="fontInput">Fonte do nome</label><select id="fontInput"><option value="sans">Impacto</option><option value="mono">Terminal</option><option value="serif">Editorial</option></select></div><div><label for="shapeInput">Formato dos cards</label><select id="shapeInput"><option value="12px">Arredondado</option><option value="0px">Reto</option><option value="24px">Bem arredondado</option></select></div></div>
+          <div class="field-pair"><div><label for="backgroundInput">Fundo</label><select id="backgroundInput"><option value="grid">Grade</option><option value="dots">Pontos</option><option value="solid" selected>Liso</option></select></div><div><label for="layoutInput">Favoritos</label><select id="layoutInput"><option value="grid">Em cards</option><option value="list">Em lista</option></select></div></div>
+          <label for="backgroundColorInput">Cor do fundo</label><input id="backgroundColorInput" type="color" value="#ffffff" />
+          <label class="checkbox-label"><input id="showProjects" type="checkbox" checked /> Mostrar meus projetos</label>
+        </div>
+      </details>
+      <details class="editor-section">
+        <summary><span><b>03</b> Minha seleção</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <!-- AULA: enviar este formulário cria um card na página. -->
+        <form id="favoriteForm" class="editor-fields">
+          <label for="favoriteTitle">Título</label><input id="favoriteTitle" maxlength="60" placeholder="Um jogo, um álbum, um livro..." required />
+          <label for="favoriteCategory">Categoria</label><select id="favoriteCategory"><option>Jogo</option><option>Filme</option><option>Música</option><option>Livro</option><option>Tecnologia</option><option>Outro</option></select>
+          <label for="favoriteComment">Seu comentário</label><textarea id="favoriteComment" maxlength="240" rows="3" placeholder="O que torna isso especial para você?" required></textarea>
+          <label for="favoriteLink">Link (opcional)</label><input id="favoriteLink" type="url" placeholder="https://..." />
+          <label for="favoriteImage">Imagem ou capa (opcional)</label><input id="favoriteImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+          <button class="button button-accent" type="button" data-submit>Adicionar à seleção <span aria-hidden="true">+</span></button>
+        </form>
+      </details>
+      <details class="editor-section">
+        <summary><span><b>04</b> Meus projetos</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <form id="projectForm" class="editor-fields">
+          <label for="projectTitle">Nome do projeto</label><input id="projectTitle" maxlength="70" placeholder="Algo que você criou ou está criando" required />
+          <label for="projectDescription">Descrição</label><textarea id="projectDescription" maxlength="240" rows="3" placeholder="O que você fez?" required></textarea>
+          <label for="projectLink">Link (opcional)</label><input id="projectLink" type="url" placeholder="https://..." />
+          <button class="button button-accent" type="button" data-submit>Adicionar projeto <span aria-hidden="true">+</span></button>
+        </form>
+      </details>
+      <details class="editor-section">
+        <summary><span><b>05</b> Meus links</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <form id="linkForm" class="editor-fields">
+          <label for="linkTitle">Nome do link</label><input id="linkTitle" maxlength="30" placeholder="GitHub, Instagram, meu canal..." required />
+          <label for="linkUrl">Endereço</label><input id="linkUrl" type="url" placeholder="https://..." required />
+          <button class="button button-accent" type="button" data-submit>Adicionar link <span aria-hidden="true">+</span></button>
+        </form>
+      </details>
+      <details class="editor-section">
+        <summary><span><b>06</b> Linguagens de programação</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+        <form id="languageForm" class="editor-fields">
+          <label for="languageInput">Linguagem ou tecnologia</label><input id="languageInput" maxlength="35" placeholder="JavaScript, Python, HTML..." required />
+          <button class="button button-accent" type="button" data-submit>Adicionar linguagem <span aria-hidden="true">+</span></button>
+          <p class="field-label">Inclua o que você usa ou quer aprender. Remova uma etiqueta pelo ×.</p>
+        </form>
+      </details>
+      <p class="editor-note">Baixe o ZIP para publicar. Guarde também o backup editável para continuar depois.</p>
+    </aside>
+    <div class="canvas">
+      <div class="canvas-heading"><span><i class="live-dot" aria-hidden="true"></i> PRÉVIA DO SEU PORTFÓLIO</span><span>SUA PÁGINA PUBLICÁVEL</span></div>
+      <!-- PERSONALIZE: o perfil é a parte que será baixada. Os campos do editor alteram seus elementos. -->
+      <section class="profile" id="profile" data-background="solid" data-layout="grid" data-tone="light" aria-label="Prévia do perfil">
+        <header class="profile-topbar"><a href="#profile" class="profile-logo"><span class="mini-mark" aria-hidden="true">/</span> <span id="profileHandle">AM</span><span class="label"> / PORTFÓLIO</span></a><span class="profile-coordinate">EST. 2026</span></header>
+        <div class="profile-hero">
+          <div class="hero-content"><p class="hero-kicker" id="profileRole">DESIGN • CÓDIGO • CULTURA DIGITAL</p><h2 id="profileName">Alex Morgan</h2><p class="hero-bio" id="profileBio">Coleciono referências, crio na internet e tenho mais abas abertas do que deveria.</p><div class="profile-meta"><span><span aria-hidden="true">⌖</span> <span id="profileLocation">Recife, BR</span></span><span class="status-pill"><i aria-hidden="true"></i><span id="profileStatus">Construindo meu próximo projeto</span></span></div></div>
+          <div class="portrait-frame"><span class="portrait-cross cross-one" aria-hidden="true">+</span><span class="portrait-cross cross-two" aria-hidden="true">+</span><div class="portrait"><span id="avatarInitials" aria-hidden="true">AM</span><img id="avatarPhoto" alt="Foto de Alex Morgan" hidden /></div><span class="portrait-label">RETRATO / <span aria-hidden="true">↗</span></span></div>
+        </div>
+        <div class="profile-links" id="profileLinks"><p class="empty-note editor-only" id="linksEmpty">Adicione seus links em “05 — Meus links”.</p></div>
+        <section class="languages-section" aria-labelledby="languagesHeading"><p class="label" id="languagesHeading">MINHA STACK / USO OU QUERO APRENDER</p><div class="language-list" id="languageList"></div><p class="empty-note editor-only" id="languagesEmpty">Adicione suas linguagens em “06 — Linguagens de programação”.</p></section>
+        <section class="collection-section" aria-labelledby="collectionHeading"><div class="section-heading"><div><p class="label">01 / CURADORIA PESSOAL</p><h3 id="collectionHeading">Minha seleção<span>.</span></h3></div><span class="collection-count" id="collectionCount">03 ITENS</span></div><p class="section-description">Referências que fazem parte do meu mundo. Abra um card para saber por quê.</p><div class="collection-grid" id="favoriteList"></div><p class="empty-note" id="favoritesEmpty" hidden>Minha seleção está em construção.</p></section>
+        <section class="projects-section" id="projectsSection" aria-labelledby="projectsHeading"><div class="section-heading"><div><p class="label">02 / MEUS PROJETOS</p><h3 id="projectsHeading">O que eu construo<span>.</span></h3></div><span class="section-mark" aria-hidden="true">↗</span></div><div class="project-grid" id="projectList"></div><p class="empty-note" id="projectsEmpty" hidden>Novos projetos em breve.</p></section>
+        <footer class="profile-footer"><span>UM PERFIL. VÁRIAS CAMADAS.</span><span>FEITO POR <span id="profileSignature">ALEX MORGAN</span> <span aria-hidden="true">↗</span></span></footer>
+      </section>
+      <p class="export-hint">Para publicar o perfil: baixe seu ZIP e envie-o ao Amplify. O HTML e o CSS já estão incluídos.</p>
+    </div>
+  </main>
+  <dialog id="exportDialog" class="export-dialog" aria-labelledby="exportHeading">
+    <h2 id="exportHeading">Salvar seu perfil</h2>
+    <p>Esta prévia do chat bloqueia downloads. Seu perfil foi gerado com as alterações que você fez.</p>
+    <p id="exportInstructions">Copie o HTML abaixo e salve em um arquivo chamado <strong>index.html</strong>. Para usar o download direto, abra o Studio pelo link fora da prévia ou abra o projeto no seu navegador.</p>
+    <label for="exportHtml">HTML do seu perfil</label>
+    <textarea id="exportHtml" readonly rows="6" spellcheck="false"></textarea>
+    <p id="exportCopyStatus" role="status" aria-live="polite"></p>
+    <div class="export-dialog-actions"><button id="copyExportButton" class="button button-accent" type="button">Copiar HTML</button><button id="closeExportButton" class="button button-quiet" type="button">Voltar à edição</button></div>
+  </dialog>
+  <!-- APOIO: cópia do CSS para gerar o ZIP mesmo ao abrir o projeto sem servidor. -->
+  <script id="exportStyles" type="text/plain">
+/* PERSONALIZE: as cores do Studio e as medidas gerais começam aqui. */
+:root {
+  color-scheme: dark;
+  --studio-accent: #c7fa62;
+  --page: #090a0b;
+  --panel: #111315;
+  --line: #2a2e31;
+  --ink: #f0f1ef;
+  --muted: #a1a7aa;
+  --font: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+button, input, textarea, select {
+  font: inherit;
+}
+button, summary {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+}
+button {
+  color: inherit;
+}
+button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+input, textarea, select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #363c40;
+  border-radius: 7px;
+  padding: 10px 11px;
+  background: #191c1f;
+  color: var(--ink);
+  font-size: .82rem;
+}
+textarea {
+  resize: vertical;
+}
+input::placeholder, textarea::placeholder {
+  color: #969ca0;
+}
+input[type="file"] {
+  font-size: .72rem;
+  padding: 8px;
+}
+input::file-selector-button {
+  margin-right: 8px;
+  border: 0;
+  border-radius: 4px;
+  padding: 6px 8px;
+  background: #303639;
+  color: var(--ink);
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--studio-accent);
+}
+:focus-visible {
+  outline: 2px solid var(--studio-accent);
+  outline-offset: 4px;
+}
+::selection {
+  background: var(--studio-accent);
+  color: #111;
+}
+h1, h2, h3, h4, p, a {
+  overflow-wrap: anywhere;
+}
+.studio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 84px;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--line);
+}
+.studio-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -.05em;
+}
+.brand-symbol {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--studio-accent);
+  color: #0c1007;
+  font-size: 1.2rem;
+}
+.studio-tag {
+  margin-left: 9px;
+  border-left: 1px solid #42474b;
+  padding-left: 15px;
+  color: var(--muted);
+  font-family: monospace;
+  font-size: .66rem;
+  letter-spacing: .12em;
+}
+.studio-actions {
+  display: flex;
+  gap: 10px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 10px 14px;
+  font-size: .8rem;
+  font-weight: 700;
+  transition: background 160ms, transform 160ms;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button-accent {
+  background: var(--studio-accent);
+  color: #142007;
+}
+.button-quiet {
+  border-color: #3e4448;
+  background: transparent;
+}
+.button-quiet:hover {
+  background: #202529;
+}
+.studio-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  align-items: start;
+  gap: 30px;
+  max-width: 1660px;
+  margin: auto;
+  padding: 30px 32px 70px;
+}
+.editor {
+  min-width: 0;
+}
+.editor-heading {
+  padding: 5px 0 21px;
+}
+.label {
+  margin: 0;
+  font-family: monospace;
+  font-size: .65rem;
+  letter-spacing: .12em;
+}
+.editor-heading .label {
+  color: var(--studio-accent);
+  font-size: .6rem;
+}
+.editor-heading h1 {
+  margin: 10px 0;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+.editor-heading h1 span {
+  color: var(--studio-accent);
+}
+.editor-heading > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.editor-section {
+  margin-bottom: 10px;
+  border: 1px solid #30363a;
+  border-radius: 9px;
+  background: var(--panel);
+}
+.editor-section > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-size: .83rem;
+  font-weight: 700;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.editor-section summary b {
+  margin-right: 10px;
+  color: var(--studio-accent);
+  font-family: monospace;
+  font-size: .7rem;
+}
+.accordion-icon {
+  color: var(--muted);
+  font-size: 1.2rem;
+  transition: transform 160ms;
+}
+.editor-section[open] .accordion-icon {
+  transform: rotate(45deg);
+}
+.editor-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 3px 15px 18px;
+}
+.editor-fields label, .field-label {
+  margin: 8px 0 0;
+  color: #c0c6c9;
+  font-size: .72rem;
+}
+.field-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.field-pair label {
+  display: block;
+  margin-bottom: 8px;
+}
+.checkbox-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.text-button {
+  align-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--studio-accent);
+  font-size: .72rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.accent-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+.accent-picker > button {
+  width: 29px;
+  height: 29px;
+  border: 3px solid var(--panel);
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 1px #50585d;
+}
+.accent-picker > button[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px #f1f1f1;
+}
+.custom-color {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0 !important;
+}
+.custom-color input {
+  width: 30px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.editor-note {
+  padding: 6px 10px;
+  color: var(--muted);
+  font-size: .73rem;
+}
+.canvas {
+  min-width: 0;
+}
+.canvas-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: monospace;
+  font-size: .62rem;
+  letter-spacing: .09em;
+  color: var(--muted);
+}
+.canvas-heading > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--studio-accent);
+}
+/* PERSONALIZE: o editor altera estas propriedades apenas no perfil. */
+.profile {
+  --profile-background: #111412;
+  --profile-text: #f0f1ed;
+  --profile-muted: #b8c1ba;
+  --accent: #c7fa62;
+  --accent-ink: #142007;
+  --card-radius: 12px;
+  --name-font: Arial, Helvetica, sans-serif;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #333b36;
+  border-radius: 14px;
+  background-color: var(--profile-background);
+  padding: 28px clamp(22px, 4vw, 52px) 25px;
+  color: var(--profile-text);
+}
+.profile[data-background="grid"] {
+  background-image: linear-gradient(#ffffff04 1px, transparent 1px), linear-gradient(90deg, #ffffff04 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.profile[data-background="dots"] {
+  background-image: radial-gradient(#ffffff20 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.profile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto auto;
+  width: 65%;
+  height: 380px;
+  background: radial-gradient(ellipse at 100% 0, color-mix(in srgb, var(--accent) 10%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.profile :focus-visible {
+  outline-color: var(--accent);
+}
+.profile-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ffffff15;
+}
+.profile-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 800;
+}
+.profile-logo .label {
+  color: #929c93;
+  font-size: .55rem;
+}
+.mini-mark {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+.profile-coordinate {
+  color: #9aaba0;
+  font-family: monospace;
+  font-size: .6rem;
+}
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 170px;
+  gap: 24px;
+  align-items: center;
+  padding: 58px 0 35px;
+}
+.hero-kicker {
+  margin: 0 0 17px;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: .65rem;
+  letter-spacing: .14em;
+}
+.profile h2 {
+  max-width: 780px;
+  margin: 0;
+  font-family: var(--name-font);
+  font-size: clamp(3.1rem, 5.8vw, 6.3rem);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+}
+.hero-bio {
+  max-width: 520px;
+  margin: 22px 0;
+  color: #b8c1ba;
+  font-size: .95rem;
+  line-height: 1.65;
+}
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  font-family: monospace;
+  font-size: .61rem;
+  color: #b5bfb7;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  border: 1px solid #ffffff20;
+  border-radius: 4px;
+}
+.status-pill i {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.portrait-frame {
+  position: relative;
+  width: 170px;
+  padding: 10px;
+  border: 1px solid #ffffff30;
+  transform: rotate(4deg);
+}
+.portrait {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: repeating-linear-gradient(-35deg, transparent 0 20px, #00000015 20px 21px), var(--accent);
+  color: var(--accent-ink);
+}
+.portrait > span {
+  font-size: 4.7rem;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.09em;
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.portrait-label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  font: .57rem monospace;
+  letter-spacing: .12em;
+  color: #b7c2b8;
+}
+.portrait-cross {
+  position: absolute;
+  color: var(--accent);
+  font: 1rem monospace;
+}
+.cross-one {
+  top: -11px;
+  left: -6px;
+}
+.cross-two {
+  bottom: -9px;
+  right: -6px;
+}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #ffffff25;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: .73rem;
+  text-decoration: none;
+  transition: color 160ms, border-color 160ms;
+}
+.profile-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 15px;
+}
+.section-heading .label {
+  color: #95a69a;
+  font-size: .56rem;
+}
+.section-heading h3 {
+  margin: 8px 0 0;
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+.section-heading h3 span {
+  color: var(--accent);
+}
+.collection-count {
+  padding: 5px 8px;
+  border: 1px solid #ffffff25;
+  font: .58rem monospace;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.section-description {
+  margin: 0 0 22px;
+  color: #a5b0a8;
+  font-size: .78rem;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+}
+.collection-item {
+  min-width: 0;
+  position: relative;
+}
+.collection-card {
+  overflow: hidden;
+  border: 1px solid #ffffff20;
+  border-radius: var(--card-radius);
+  background: #191d1a;
+  transition: border-color 180ms, transform 180ms;
+}
+.collection-card > summary {
+  list-style: none;
+}
+.card-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #252d22;
+}
+.card-visual::before, .card-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.card-visual::before {
+  width: 62%;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: .65;
+}
+.card-visual::after {
+  inset: 0;
+  background: linear-gradient(transparent 65%, #00000040), repeating-linear-gradient(0deg, transparent 0 4px, #00000015 4px 5px);
+}
+.visual-game {
+  background: linear-gradient(150deg, #262134, #514266);
+}
+.visual-game::before {
+  width: 46%;
+  height: 82%;
+  border-radius: 70px 70px 0 0;
+  border-width: 3px;
+  transform: translateY(20%);
+}
+.visual-film {
+  background: radial-gradient(ellipse at 50% 90%, #b46132, #352622 65%);
+}
+.visual-film::before {
+  width: 120%;
+  transform: rotate(-30deg) scaleY(.35);
+}
+.visual-music {
+  background: radial-gradient(circle at 50% 50%, #49212b, #20191d);
+}
+.visual-music::before {
+  border-width: 18px;
+  box-shadow: 0 0 0 12px #ffffff08, 0 0 0 24px #ffffff06;
+}
+.card-mark {
+  position: relative;
+  z-index: 1;
+  color: var(--accent);
+  font-size: 3.6rem;
+  font-weight: 900;
+  font-family: monospace;
+  letter-spacing: -.12em;
+}
+.card-image {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-info {
+  padding: 16px;
+}
+.card-category {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent);
+  font: .55rem monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.card-title-row {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  justify-content: space-between;
+}
+.card-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.03em;
+}
+.card-open-icon {
+  color: var(--accent);
+  transition: transform 160ms;
+}
+.collection-card[open] .card-open-icon {
+  transform: rotate(90deg);
+}
+.card-details {
+  margin: 0 16px;
+  padding: 14px 0 18px;
+  border-top: 1px solid #ffffff15;
+}
+.card-details p {
+  margin: 0;
+  color: #b5c0b7;
+  font-size: .78rem;
+}
+.card-details a {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--accent);
+  font-size: .72rem;
+  text-underline-offset: 4px;
+}
+/* AULA: :hover é suficiente para a reação visual ao passar o mouse. */
+@media (hover: hover) {
+  .collection-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+  }
+}
+.remove-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 1px solid #778175;
+  border-radius: 50%;
+  background: #0d100ee8;
+  color: #e8eee6;
+  font-size: 1rem;
+}
+.collection-item > .remove-button {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  right: 9px;
+}
+.remove-button:hover {
+  border-color: #ffaaa5;
+  color: #ffaaa5;
+}
+.profile[data-layout="list"] .collection-grid {
+  grid-template-columns: 1fr;
+}
+.profile[data-layout="list"] .collection-card > summary {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: center;
+}
+.profile[data-layout="list"] .card-visual {
+  height: 115px;
+  aspect-ratio: auto;
+}
+.profile[data-layout="list"] .card-details {
+  margin-left: 156px;
+}
+.projects-section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid #ffffff18;
+}
+.section-mark {
+  color: var(--accent);
+  font-size: 2rem;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.project-card {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #ffffff20;
+  border-radius: var(--card-radius);
+  background: #191d1a;
+}
+.project-card .remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.project-number {
+  color: var(--accent);
+  font: .65rem monospace;
+}
+.project-card h4 {
+  margin: 20px 20px 10px 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+}
+.project-card p {
+  margin: 0;
+  color: #b5c0b7;
+  font-size: .78rem;
+}
+.project-card a {
+  display: inline-flex;
+  margin-top: 20px;
+  color: var(--accent);
+  font-size: .73rem;
+  text-underline-offset: 4px;
+}
+.empty-note {
+  margin: 0;
+  color: #a3ada5;
+  font-size: .75rem;
+}
+.profile-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 35px;
+  border-top: 1px solid #ffffff18;
+  padding-top: 20px;
+  color: #94a497;
+  font: .53rem monospace;
+  letter-spacing: .07em;
+}
+.profile-footer > span:last-child {
+  color: var(--accent);
+}
+.export-hint {
+  margin: 16px 0 0;
+  color: #a1a7aa;
+  text-align: center;
+  font-size: .73rem;
+}
+.feedback {
+  position: fixed;
+  z-index: 50;
+  bottom: 20px;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  transform: translateX(-50%);
+  margin: 0;
+  border: 1px solid #5b6654;
+  border-radius: 8px;
+  padding: 13px 18px;
+  background: #1c2519;
+  color: #eef4e8;
+  box-shadow: 0 10px 40px #0009;
+  font-size: .8rem;
+}
+.feedback:empty {
+  display: none;
+}
+.preview-mode .editor {
+  display: none;
+}
+.preview-mode .studio-shell {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1160px;
+}
+.preview-mode .profile h2 {
+  font-size: clamp(3.1rem, 7vw, 7rem);
+}
+.published-page {
+  padding: 30px;
+}
+.published-page .profile {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.published-page .editor-only {
+  display: none;
+}
+.published-page .profile h2 {
+  font-size: clamp(3.1rem, 7vw, 7rem);
+}
+@media (max-width: 1200px) {
+  .studio-shell {
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 20px;
+    padding: 25px 20px 50px;
+  }
+  .profile {
+    padding: 24px;
+  }
+  .profile-hero {
+    grid-template-columns: minmax(0, 1fr) 130px;
+  }
+  .portrait-frame {
+    width: 130px;
+  }
+  .portrait > span {
+    font-size: 3.7rem;
+  }
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .studio-header {
+    padding: 15px 20px;
+  }
+  .studio-tag {
+    display: none;
+  }
+  .studio-shell {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px 16px 50px;
+  }
+  .profile-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 35px;
+  }
+  .portrait-frame {
+    grid-row: 1;
+    width: 105px;
+  }
+  .portrait > span {
+    font-size: 3rem;
+  }
+  .profile h2 {
+    font-size: 3.5rem;
+  }
+  .collection-grid, .project-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-logo .label, .canvas-heading > span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .studio-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    padding: 17px;
+  }
+  .studio-actions {
+    justify-content: space-between;
+  }
+  .studio-actions .button {
+    flex: 1;
+    gap: 10px;
+    padding: 10px;
+    font-size: .72rem;
+  }
+  .studio-shell {
+    grid-template-columns: 1fr;
+    padding: 22px 14px 45px;
+    gap: 25px;
+  }
+  .editor-heading {
+    padding-top: 0;
+  }
+  .profile {
+    padding: 24px 20px;
+  }
+  .profile-hero {
+    grid-template-columns: 1fr;
+  }
+  .profile h2 {
+    font-size: clamp(2.6rem, 11vw, 4rem);
+  }
+  .profile-topbar .label {
+    display: block;
+  }
+  .hero-bio {
+    font-size: .85rem;
+  }
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile[data-layout="list"] .collection-card > summary {
+    grid-template-columns: 95px minmax(0, 1fr);
+  }
+  .profile[data-layout="list"] .card-details {
+    margin-left: 16px;
+  }
+  .profile[data-layout="list"] .card-info {
+    padding: 12px;
+  }
+  .profile[data-layout="list"] .card-mark {
+    font-size: 2.5rem;
+  }
+  .published-page {
+    padding: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}
+
+/* Linguagens: etiquetas simples que acompanham o perfil exportado. */
+.languages-section { margin-bottom: 32px; }
+.language-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.language-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid currentColor; border-radius: 6px; padding: 7px 12px; font-family: "Courier New", monospace; font-size: .85rem; max-width: 100%; }
+.language-name { overflow-wrap: anywhere; }
+.language-tag .remove-button { position: static; }
+.profile .hero-bio, .profile .profile-meta, .profile .profile-coordinate, .profile .profile-topbar .label, .profile .section-description, .profile .profile-footer, .profile .languages-section .label, .profile .empty-note { color: var(--profile-muted); }
+.profile[data-tone="light"] .hero-kicker, .profile[data-tone="light"] .section-heading .label, .profile[data-tone="light"] .section-heading h3 span, .profile[data-tone="light"] .collection-count, .profile[data-tone="light"] .section-mark, .profile[data-tone="light"] .profile-footer span { color: var(--profile-text); }
+.profile[data-tone="light"] .status-pill { color: var(--profile-text); }
+.collection-card, .project-card { color: #f0f1ed; }
+
+/* Exportação alternativa para ambientes que bloqueiam downloads. */
+.export-dialog {
+  background: #161b1e;
+  color: #f0f1ed;
+  border: 1px solid #48534b;
+  border-radius: 16px;
+  padding: 24px;
+  width: min(600px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+}
+.export-dialog::backdrop { background: #000b; }
+.export-dialog p { margin: 16px 0; line-height: 1.6; }
+.export-dialog label { display: block; margin-bottom: 8px; }
+.export-dialog textarea { width: 100%; font-family: monospace; }
+.export-dialog-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  </script>
+  <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+<script>const perfil = document.querySelector("#profile");
+const feedback = document.querySelector("#feedback");
+const botaoExportar = document.querySelector("#exportButton");
+
+// AULA 1: ENCONTRAR → OUVIR → ALTERAR.
+// data-edit guarda o seletor do elemento que cada campo modifica.
+document.querySelectorAll("[data-edit]").forEach((campo) => {
+  campo.addEventListener("input", () => {
+    const elemento = document.querySelector(campo.dataset.edit);
+    elemento.textContent = campo.value;
+    atualizarIdentidade();
+  });
+});
+
+// AULA 2: o clique muda uma propriedade CSS do perfil; o CSS aplica a cor.
+const botoesCor = document.querySelectorAll("[data-accent]");
+botoesCor.forEach((botao) => {
+  botao.addEventListener("click", () => aplicarCor(botao.dataset.accent));
+});
+document.querySelector("#accentInput").addEventListener("input", (evento) => {
+  aplicarCor(evento.target.value);
+});
+
+// A cor do fundo também é uma propriedade CSS; o texto acompanha o contraste.
+document.querySelector("#backgroundColorInput").addEventListener("input", (evento) => {
+  const cor = evento.target.value;
+  perfil.style.setProperty("--profile-background", cor);
+  const claro = luminanciaCor(cor) > .179;
+  perfil.dataset.tone = claro ? "light" : "dark";
+  perfil.style.setProperty("--profile-text", claro ? "#161b18" : "#f0f1ed");
+  perfil.style.setProperty("--profile-muted", claro ? "#38453d" : "#b8c1ba");
+});
+
+// Outros controles seguem a mesma ideia: ouvir uma escolha e mudar o elemento.
+const fontes = { sans: "Arial, Helvetica, sans-serif", mono: '"Courier New", monospace', serif: "Georgia, serif" };
+document.querySelector("#fontInput").addEventListener("change", (evento) => {
+  perfil.style.setProperty("--name-font", fontes[evento.target.value]);
+});
+document.querySelector("#shapeInput").addEventListener("change", (evento) => {
+  perfil.style.setProperty("--card-radius", evento.target.value);
+});
+document.querySelector("#backgroundInput").addEventListener("change", (evento) => {
+  perfil.dataset.background = evento.target.value;
+});
+document.querySelector("#layoutInput").addEventListener("change", (evento) => {
+  perfil.dataset.layout = evento.target.value;
+});
+document.querySelector("#showProjects").addEventListener("change", (evento) => {
+  document.querySelector("#projectsSection").hidden = !evento.target.checked;
+});
+
+// AULA 3: o formulário lê os campos e acrescenta um card à coleção.
+const formularioFavorito = document.querySelector("#favoriteForm");
+ouvirFormulario(formularioFavorito, async () => {
+  const titulo = lerTextoObrigatorio("#favoriteTitle");
+  const comentario = lerTextoObrigatorio("#favoriteComment");
+  const link = lerLink("#favoriteLink");
+  if (!titulo || !comentario || link === null) return;
+
+  const botao = formularioFavorito.querySelector("[data-submit]");
+  botao.disabled = true;
+  try {
+    const imagem = await lerImagem(document.querySelector("#favoriteImage").files[0]);
+    adicionarFavorito({ titulo, comentario, link, imagem, categoria: document.querySelector("#favoriteCategory").value });
+    formularioFavorito.reset();
+    avisar("Novo favorito adicionado à sua seleção.");
+    document.querySelector("#favoriteTitle").focus();
+  } catch (erro) {
+    avisar(erro.message);
+  } finally {
+    botao.disabled = false;
+  }
+});
+
+function adicionarFavorito(favorito) {
+  // createElement cria o elemento; append coloca-o dentro de outro.
+  const item = document.createElement("article");
+  item.className = "collection-item";
+  const detalhes = criarElemento("details", "collection-card");
+  const resumo = criarElemento("summary");
+  const estilos = { Jogo: "visual-game", Filme: "visual-film", Música: "visual-music" };
+  const visual = criarElemento("div", "card-visual " + (estilos[favorito.categoria] || ""));
+  const marca = criarElemento("span", "card-mark", iniciais(favorito.titulo));
+  marca.setAttribute("aria-hidden", "true");
+  visual.append(marca);
+  if (favorito.imagem) {
+    const imagem = criarElemento("img", "card-image");
+    imagem.src = favorito.imagem;
+    imagem.alt = "Imagem de " + favorito.titulo;
+    visual.append(imagem);
+  }
+  const informacao = criarElemento("div", "card-info");
+  const categoria = criarElemento("span", "card-category", favorito.categoria);
+  const linhaTitulo = criarElemento("div", "card-title-row");
+  const titulo = criarElemento("h4", "", favorito.titulo);
+  const seta = criarElemento("span", "card-open-icon", "↗");
+  seta.setAttribute("aria-hidden", "true");
+  linhaTitulo.append(titulo, seta);
+  informacao.append(categoria, linhaTitulo);
+  resumo.append(visual, informacao);
+  const conteudo = criarElemento("div", "card-details");
+  const comentario = criarElemento("p", "", favorito.comentario);
+  // textContent trata o que a pessoa escreveu como texto, sem interpretar HTML.
+  conteudo.append(comentario);
+  if (favorito.link) conteudo.append(criarLink(favorito.link, "Explorar referência ↗"));
+  detalhes.append(resumo, conteudo);
+  item.append(detalhes, criarRemover(item, favorito.titulo, "#collectionHeading"));
+  document.querySelector("#favoriteList").append(item);
+  atualizarContagens();
+}
+
+// PROJETOS E LINKS: o mesmo processo de ler, criar e inserir elementos.
+ouvirFormulario(document.querySelector("#projectForm"), (formulario) => {
+  const titulo = lerTextoObrigatorio("#projectTitle");
+  const descricao = lerTextoObrigatorio("#projectDescription");
+  const link = lerLink("#projectLink");
+  if (!titulo || !descricao || link === null) return;
+  adicionarProjeto({ titulo, descricao, link });
+  formulario.reset();
+  avisar("Projeto adicionado. Você pode vê-lo no seu perfil.");
+});
+function adicionarProjeto(projeto) {
+  const card = criarElemento("article", "project-card");
+  const numero = criarElemento("span", "project-number", "PROJETO / " + String(document.querySelector("#projectList").children.length + 1).padStart(2, "0"));
+  card.append(numero, criarElemento("h4", "", projeto.titulo), criarElemento("p", "", projeto.descricao));
+  if (projeto.link) card.append(criarLink(projeto.link, "Abrir projeto ↗"));
+  card.append(criarRemover(card, projeto.titulo, "#projectsHeading"));
+  document.querySelector("#projectList").append(card);
+  atualizarContagens();
+}
+ouvirFormulario(document.querySelector("#linkForm"), (formulario) => {
+  const titulo = lerTextoObrigatorio("#linkTitle");
+  const endereco = lerLink("#linkUrl", true);
+  if (!titulo || !endereco) return;
+  const item = criarElemento("div", "link-item");
+  const link = criarLink(endereco, titulo + " ↗");
+  link.className = "profile-link";
+  item.append(link, criarRemover(item, titulo, "#profileName"));
+  document.querySelector("#profileLinks").append(item);
+  formulario.reset();
+  atualizarContagens();
+  avisar("Link adicionado ao perfil.");
+});
+
+// LINGUAGENS: uma etiqueta é outro exemplo de criar e inserir um elemento.
+ouvirFormulario(document.querySelector("#languageForm"), (formulario) => {
+  const nome = lerTextoObrigatorio("#languageInput");
+  if (!nome) return;
+  const repetida = [...document.querySelectorAll(".language-name")].some((item) => item.textContent.toLocaleLowerCase("pt-BR") === nome.toLocaleLowerCase("pt-BR"));
+  if (repetida) { avisar("Essa linguagem já está no perfil."); return; }
+  adicionarLinguagem(nome);
+  formulario.reset();
+  document.querySelector("#languageInput").focus();
+  avisar("Linguagem adicionada ao perfil.");
+});
+function adicionarLinguagem(nome) {
+  const etiqueta = criarElemento("div", "language-tag");
+  etiqueta.append(criarElemento("span", "language-name", nome), criarRemover(etiqueta, nome, "#languagesHeading"));
+  document.querySelector("#languageList").append(etiqueta);
+  atualizarContagens();
+}
+
+// FOTO: FileReader transforma a imagem local em um endereço que pode acompanhar o HTML.
+let versaoAvatar = 0;
+document.querySelector("#avatarInput").addEventListener("change", async (evento) => {
+  const versao = ++versaoAvatar;
+  try {
+    const imagem = await lerImagem(evento.target.files[0]);
+    if (!imagem || versao !== versaoAvatar) return;
+    const foto = document.querySelector("#avatarPhoto");
+    foto.src = imagem;
+    foto.hidden = false;
+    document.querySelector("#avatarInitials").hidden = true;
+    avisar("Foto atualizada. Ela será incluída no download.");
+  } catch (erro) { avisar(erro.message); }
+});
+document.querySelector("#removeAvatar").addEventListener("click", () => {
+  versaoAvatar++;
+  const foto = document.querySelector("#avatarPhoto");
+  foto.hidden = true;
+  foto.removeAttribute("src");
+  document.querySelector("#avatarInitials").hidden = false;
+  document.querySelector("#avatarInput").value = "";
+});
+
+// PRÉVIA: classList alterna a classe que esconde o editor.
+document.querySelector("#previewButton").addEventListener("click", (evento) => {
+  const ativo = document.body.classList.toggle("preview-mode");
+  evento.currentTarget.setAttribute("aria-pressed", String(ativo));
+  evento.currentTarget.textContent = ativo ? "Voltar à edição ↙" : "Ver meu perfil ↗";
+});
+
+// DOWNLOAD: copia o perfil preenchido. É um recurso pronto da base da aula.
+// O ZIP contém index.html e style.css, sem editor ou JavaScript.
+botaoExportar.addEventListener("click", async () => {
+  const nome = lerTextoObrigatorio("#nameInput");
+  if (!nome) return;
+  const nomeSeguro = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "perfil";
+  const codigo = Array.from(crypto.getRandomValues(new Uint8Array(4)), byte => byte.toString(16).padStart(2, "0")).join("");
+  const nomeArquivo = nomeSeguro + "-" + codigo + ".zip";
+  const pagina = document.implementation.createHTMLDocument(nome + " | Meu espaço");
+  pagina.documentElement.lang = "pt-BR";
+  const charset = pagina.createElement("meta");
+  charset.setAttribute("charset", "utf-8");
+  const viewport = pagina.createElement("meta");
+  viewport.name = "viewport";
+  viewport.content = "width=device-width, initial-scale=1";
+  const estilo = pagina.createElement("link");
+  estilo.rel = "stylesheet";
+  estilo.href = "style.css";
+  pagina.head.prepend(charset, viewport);
+  pagina.head.append(estilo);
+  pagina.body.className = "published-page";
+  const copia = pagina.importNode(perfil, true);
+  // Remove apenas o destaque temporário da ferramenta, preservando estilos do perfil.
+  [copia, ...copia.querySelectorAll("[data-course-outline]")].forEach(elemento => {
+    if (!elemento.hasAttribute("data-course-outline")) return;
+    elemento.style.outline = elemento.getAttribute("data-course-outline");
+    elemento.removeAttribute("data-course-outline");
+    if (!elemento.getAttribute("style")) elemento.removeAttribute("style");
+  });
+  copia.setAttribute("aria-label", "Perfil de " + nome);
+  copia.querySelectorAll(".editor-only").forEach((elemento) => elemento.remove());
+  copia.querySelectorAll("details").forEach((elemento) => elemento.open = false);
+  const navegacao = pagina.createElement("nav");
+  navegacao.setAttribute("aria-label", "Páginas do perfil");
+  navegacao.style.cssText="display:flex;gap:20px;flex-wrap:wrap;padding:20px;justify-content:center";
+  for(const [href, texto] of [["index.html","Perfil"],["projetos.html","Projetos"],["contato.html","Contato"]]){
+    const a=pagina.createElement("a"); a.href=href;a.textContent=texto;a.style.color="inherit";navegacao.append(a);
+  }
+  pagina.body.append(navegacao,copia);
+  botaoExportar.disabled = true;
+  try {
+    const css = await obterCssExportacao();
+    const html = "<!doctype html>\n" + pagina.documentElement.outerHTML;
+    const arquivo = criarZip([
+      { nome: "index.html", conteudo: html },
+      { nome: "style.css", conteudo: css },
+      ...Object.entries(window.paginasOficina(nome)).map(([nome,conteudo])=>({nome,conteudo})),
+    ]);
+    if (window.cursoIntegrado) { const buffer = await arquivo.arrayBuffer(); window.parent.postMessage({ tipo: "curso-download", buffer, nome: nomeArquivo }, "*", [buffer]); return; } const endereco = URL.createObjectURL(arquivo);
+    const link = criarElemento("a");
+    link.href = endereco;
+    link.download = nomeArquivo;
+    link.className = "button button-accent";
+    link.textContent = "Salvar " + nomeArquivo;
+    const anterior = document.querySelector("#downloadReady");
+    if (anterior) { URL.revokeObjectURL(anterior.href); anterior.remove(); }
+    link.id = "downloadReady";
+    document.querySelector(".studio-actions").append(link);
+    link.click();
+    avisar("ZIP pronto. Se o download não iniciou, clique em “Salvar " + nomeArquivo + "”.");
+  } catch (erro) {
+    avisar("Não foi possível gerar o ZIP. " + erro.message);
+  } finally {
+    botaoExportar.disabled = imagensPendentes > 0;
+  }
+});
+
+// Alternativa para a prévia: copiar o perfil gerado e salvá-lo como index.html.
+document.querySelector("#closeExportButton").addEventListener("click", () => {
+  document.querySelector("#exportDialog").close();
+  botaoExportar.focus();
+});
+document.querySelector("#copyExportButton").addEventListener("click", async () => {
+  const campo = document.querySelector("#exportHtml");
+  const status = document.querySelector("#exportCopyStatus");
+  campo.focus();
+  campo.select();
+  try {
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(campo.value);
+    else if (!document.execCommand("copy")) throw new Error();
+    status.textContent = "HTML copiado. Cole em um editor e salve como index.html.";
+  } catch {
+    campo.focus();
+    campo.select();
+    status.textContent = "O navegador bloqueou a cópia automática. O HTML está selecionado: use Ctrl+C (ou ⌘C), cole em um editor e salve como index.html.";
+  }
+});
+
+// O botão chama o JavaScript diretamente: funciona também na prévia do chat,
+// onde o navegador bloqueia o envio nativo de formulários.
+// reportValidity mantém as regras dos campos; Enter também aciona a inclusão.
+function ouvirFormulario(formulario, incluir) {
+  const botao = formulario.querySelector("[data-submit]");
+  const executar = () => {
+    if (!botao.disabled && formulario.reportValidity()) incluir(formulario);
+  };
+  botao.addEventListener("click", executar);
+  formulario.addEventListener("submit", (evento) => { evento.preventDefault(); executar(); });
+  formulario.addEventListener("keydown", (evento) => {
+    if (evento.key === "Enter" && evento.target.matches('input:not([type="file"]):not([type="color"])')) {
+      evento.preventDefault();
+      executar();
+    }
+  });
+}
+
+// APOIO: estes trechos já vêm prontos para manter os blocos da aula mais curtos.
+function criarElemento(tag, classe = "", texto = "") {
+  const elemento = document.createElement(tag);
+  elemento.className = classe;
+  elemento.textContent = texto;
+  return elemento;
+}
+function criarLink(endereco, texto) {
+  const link = criarElemento("a", "", texto);
+  link.href = endereco;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  return link;
+}
+function criarRemover(elemento, titulo, foco) {
+  const botao = criarElemento("button", "remove-button editor-only", "×");
+  botao.type = "button";
+  botao.setAttribute("aria-label", "Remover " + titulo);
+  botao.addEventListener("click", () => {
+    elemento.remove();
+    atualizarContagens();
+    const destino = document.querySelector(foco);
+    destino.setAttribute("tabindex", "-1");
+    destino.focus({ preventScroll: true });
+    avisar(titulo + " removido.");
+  });
+  return botao;
+}
+function iniciais(nome) {
+  return nome.trim().split(/\s+/).filter(Boolean).slice(0, 2).map((parte) => Array.from(parte)[0]).join("").toLocaleUpperCase("pt-BR") || "EU";
+}
+function atualizarIdentidade() {
+  const nome = document.querySelector("#nameInput").value.trim() || "Seu nome";
+  document.querySelector("#profileName").textContent = nome;
+  document.querySelector("#avatarInitials").textContent = iniciais(nome);
+  document.querySelector("#profileHandle").textContent = iniciais(nome);
+  document.querySelector("#profileSignature").textContent = nome.toLocaleUpperCase("pt-BR");
+  document.querySelector("#avatarPhoto").alt = "Foto de " + nome;
+}
+function aplicarCor(cor) {
+  perfil.style.setProperty("--accent", cor);
+  // Escolhe preto ou branco para as iniciais terem contraste com a cor escolhida.
+  const luminancia = luminanciaCor(cor);
+  perfil.style.setProperty("--accent-ink", luminancia > .179 ? "#111111" : "#ffffff");
+  document.querySelector("#accentInput").value = cor;
+  botoesCor.forEach((botao) => botao.setAttribute("aria-pressed", String(botao.dataset.accent === cor)));
+}
+function luminanciaCor(cor) {
+  const canais = cor.match(/[a-f0-9]{2}/gi).map((canal) => parseInt(canal, 16) / 255).map((canal) => canal <= .04045 ? canal / 12.92 : ((canal + .055) / 1.055) ** 2.4);
+  return canais[0] * .2126 + canais[1] * .7152 + canais[2] * .0722;
+}
+function atualizarContagens() {
+  document.querySelector("#languagesEmpty").hidden = document.querySelector("#languageList").children.length > 0;
+  const quantidade = document.querySelector("#favoriteList").children.length;
+  document.querySelector("#collectionCount").textContent = String(quantidade).padStart(2, "0") + (quantidade === 1 ? " ITEM" : " ITENS");
+  document.querySelector("#favoritesEmpty").hidden = quantidade > 0;
+  const projetos = document.querySelectorAll("#projectList .project-card");
+  projetos.forEach((card, index) => card.querySelector(".project-number").textContent = "PROJETO / " + String(index + 1).padStart(2, "0"));
+  document.querySelector("#projectsEmpty").hidden = projetos.length > 0;
+  document.querySelector("#linksEmpty").hidden = document.querySelectorAll("#profileLinks .link-item").length > 0;
+}
+function lerTextoObrigatorio(seletor) {
+  const campo = document.querySelector(seletor);
+  const texto = campo.value.trim();
+  if (!texto) {
+    if (document.body.classList.contains("preview-mode")) document.querySelector("#previewButton").click();
+    const secao = campo.closest("details");
+    if (secao) secao.open = true;
+    campo.setCustomValidity("Preencha este campo com algum texto.");
+    campo.reportValidity();
+  }
+  return texto;
+}
+function lerLink(seletor, obrigatorio = false) {
+  const campo = document.querySelector(seletor);
+  const texto = campo.value.trim();
+  if (!texto && !obrigatorio) return "";
+  try {
+    const endereco = new URL(texto);
+    if (!["http:", "https:"].includes(endereco.protocol)) throw new Error();
+    return endereco.href;
+  } catch {
+    campo.setCustomValidity("Use um endereço completo começando com https:// ou http://.");
+    campo.reportValidity();
+    return null;
+  }
+}
+document.querySelectorAll("input, textarea").forEach((campo) => campo.addEventListener("input", () => campo.setCustomValidity("")));
+let imagensPendentes = 0;
+async function lerImagem(arquivo) {
+  if (!arquivo) return "";
+  if (!["image/png", "image/jpeg", "image/jpg", "image/webp", "image/gif"].includes(arquivo.type) && !(arquivo.type === "" && /\.(png|jpe?g|webp|gif)$/i.test(arquivo.name))) throw new Error("Escolha uma imagem PNG, JPG, WebP ou GIF.");
+  if (arquivo.size > 8 * 1024 * 1024) throw new Error("A imagem deve ter até 8 MB.");
+  imagensPendentes++;
+  botaoExportar.disabled = true;
+  try {
+    const dados = await new Promise((resolve, reject) => {
+      const leitor = new FileReader();
+      leitor.onload = () => resolve(leitor.result);
+      leitor.onerror = () => reject(new Error("Não foi possível ler a imagem. Tente outro arquivo."));
+      leitor.readAsDataURL(arquivo);
+    });
+    // Confere se o arquivo é uma imagem que o navegador consegue abrir.
+    await new Promise((resolve, reject) => {
+      const imagem = new Image();
+      imagem.onload = resolve;
+      imagem.onerror = () => reject(new Error("Não foi possível abrir essa imagem. Escolha outra."));
+      imagem.src = dados;
+    });
+    return dados;
+  } finally {
+    imagensPendentes--;
+    botaoExportar.disabled = imagensPendentes > 0;
+  }
+}
+let avisoTimeout;
+function avisar(texto) {
+  clearTimeout(avisoTimeout);
+  feedback.textContent = texto;
+  avisoTimeout = setTimeout(() => feedback.textContent = "", 6500);
+}
+
+// PERSONALIZE: exemplos iniciais. Na interface, remova-os e adicione seus próprios itens.
+[
+  { titulo: "Hollow Knight", categoria: "Jogo", comentario: "O tipo de mundo que me faz explorar cada canto antes de seguir em frente." },
+  { titulo: "Blade Runner 2049", categoria: "Filme", comentario: "Uma referência visual que eu sempre revisito: luz, silêncio e contraste." },
+  { titulo: "After Hours", categoria: "Música", comentario: "A trilha das minhas sessões de criação, quase sempre depois da meia-noite." },
+].forEach(adicionarFavorito);
+[
+  { titulo: "Meu primeiro deploy", descricao: "Uma página feita com HTML, CSS e JavaScript, publicada na internet." },
+  { titulo: "Interface em construção", descricao: "Meu laboratório de layouts, cores e pequenas interações." },
+].forEach(adicionarProjeto);
+atualizarIdentidade();
+
+["JavaScript", "HTML", "CSS"].forEach(adicionarLinguagem);
+
+// EXPORTAÇÃO — recurso pronto da aula. Sem dependências nem conexão obrigatória.
+async function obterCssExportacao() {
+  const incorporado = document.querySelector("style[data-export-style]");
+  if (incorporado) return incorporado.textContent;
+  // Com servidor, inclui inclusive alterações feitas diretamente no style.css.
+  if (["http:", "https:"].includes(location.protocol)) {
+    try {
+      const resposta = await fetch("style.css", { cache: "no-store", signal: AbortSignal.timeout(4000) });
+      if (resposta.ok) return await resposta.text();
+    } catch { /* Sem rede, usa a cópia de apoio incluída no HTML. */ }
+  }
+  const css = document.querySelector("#exportStyles")?.textContent;
+  if (!css?.trim()) throw new Error("A cópia dos estilos não foi encontrada.");
+  return css.trim();
+}
+
+// Monta um ZIP sem compressão, com os arquivos diretamente na raiz.
+// Esta parte vem pronta: não é necessário ensinar o formato ZIP na aula.
+function criarZip(arquivos) {
+  const encoder = new TextEncoder();
+  const partes = [];
+  const diretorio = [];
+  let deslocamento = 0;
+  const tabelaCrc = new Uint32Array(256);
+  for (let i = 0; i < 256; i++) {
+    let crc = i;
+    for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0);
+    tabelaCrc[i] = crc;
+  }
+  for (const arquivo of arquivos) {
+    const nome = encoder.encode(arquivo.nome);
+    const dados = encoder.encode(arquivo.conteudo);
+    let crc = 0xffffffff;
+    for (const byte of dados) crc = (crc >>> 8) ^ tabelaCrc[(crc ^ byte) & 255];
+    crc = (crc ^ 0xffffffff) >>> 0;
+    const local = new Uint8Array(30 + nome.length);
+    const cabecalho = new DataView(local.buffer);
+    cabecalho.setUint32(0, 0x04034b50, true);
+    cabecalho.setUint16(4, 20, true);
+    cabecalho.setUint16(6, 0x0800, true); // Texto UTF-8.
+    cabecalho.setUint16(12, 0x0021, true); // Data DOS válida: 01/01/1980.
+    cabecalho.setUint32(14, crc, true);
+    cabecalho.setUint32(18, dados.length, true);
+    cabecalho.setUint32(22, dados.length, true);
+    cabecalho.setUint16(26, nome.length, true);
+    local.set(nome, 30);
+    partes.push(local, dados);
+    const central = new Uint8Array(46 + nome.length);
+    const indice = new DataView(central.buffer);
+    indice.setUint32(0, 0x02014b50, true);
+    indice.setUint16(4, 20, true);
+    indice.setUint16(6, 20, true);
+    indice.setUint16(8, 0x0800, true);
+    indice.setUint16(14, 0x0021, true);
+    indice.setUint32(16, crc, true);
+    indice.setUint32(20, dados.length, true);
+    indice.setUint32(24, dados.length, true);
+    indice.setUint16(28, nome.length, true);
+    indice.setUint32(42, deslocamento, true);
+    central.set(nome, 46);
+    diretorio.push(central);
+    deslocamento += local.length + dados.length;
+  }
+  const tamanhoDiretorio = diretorio.reduce((total, item) => total + item.length, 0);
+  const fim = new Uint8Array(22);
+  const registro = new DataView(fim.buffer);
+  registro.setUint32(0, 0x06054b50, true);
+  registro.setUint16(8, arquivos.length, true);
+  registro.setUint16(10, arquivos.length, true);
+  registro.setUint32(12, tamanhoDiretorio, true);
+  registro.setUint32(16, deslocamento, true);
+  return new Blob([...partes, ...diretorio, fim], { type: "application/zip" });
+}
+
+
+// Extensão da oficina: páginas publicáveis e backup completo dos controles e do perfil.
+const modelosOficina = {"projetos.html": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Projetos | Oficina Amplify</title><link rel=\"stylesheet\" href=\"style.css\"></head>\n<body><header><a href=\"index.html\">PORTFÓLIO / LAB</a><nav><a href=\"index.html\">Perfil</a><a href=\"projetos.html\">Projetos</a><a href=\"contato.html\">Contato</a></nav></header><main><p class=\"eyebrow\">LABORATÓRIO • V1</p><h1>Ideias que viraram projetos.</h1><div class=\"grid\"><article class=\"card\"><h2>Mapa cultural</h2><p>Um catálogo de lugares para descobrir a cidade.</p></article><article class=\"card\"><h2>Estúdio digital</h2><p>Uma coleção de experimentos visuais.</p></article></div></main><footer>Exemplo fictício para a oficina. Arquivos estáticos • publicação manual.</footer></body></html>", "contato.html": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Contato | Oficina Amplify</title><link rel=\"stylesheet\" href=\"style.css\"></head>\n<body><header><a href=\"index.html\">PORTFÓLIO / LAB</a><nav><a href=\"index.html\">Perfil</a><a href=\"projetos.html\">Projetos</a><a href=\"contato.html\">Contato</a></nav></header><main><p class=\"eyebrow\">LABORATÓRIO • V1</p><h1>Vamos conversar.</h1><p>Esta é a página de destino da reescrita <code>/fale-comigo</code>. Não há formulário nem envio a um backend.</p><a href=\"mailto:exemplo@example.com\">Enviar e-mail pelo seu aplicativo</a></main><footer>Exemplo fictício para a oficina. Arquivos estáticos • publicação manual.</footer></body></html>", "404.html": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Página não encontrada | Oficina Amplify</title><link rel=\"stylesheet\" href=\"style.css\"></head>\n<body><header><a href=\"index.html\">PORTFÓLIO / LAB</a><nav><a href=\"index.html\">Perfil</a><a href=\"projetos.html\">Projetos</a><a href=\"contato.html\">Contato</a></nav></header><main><p class=\"eyebrow\">LABORATÓRIO • V1</p><span class=\"badge\">404</span><h1>Esse caminho não existe.</h1><p>O arquivo existe; o status 404 será configurado no Amplify para os caminhos ausentes. Abrir este arquivo diretamente pode retornar 200.</p><a href=\"index.html\">Voltar ao perfil</a></main><footer>Exemplo fictício para a oficina. Arquivos estáticos • publicação manual.</footer></body></html>", "especial.html": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Projeto especial | Oficina Amplify</title><link rel=\"stylesheet\" href=\"style.css\"></head>\n<body><header><a href=\"index.html\">PORTFÓLIO / LAB</a><nav><a href=\"index.html\">Perfil</a><a href=\"projetos.html\">Projetos</a><a href=\"contato.html\">Contato</a></nav></header><main><p class=\"eyebrow\">LABORATÓRIO • V1</p><h1>Projeto em destaque.</h1><p>Você chegou ao destino da regra específica para <code>/antigo/especial</code>.</p></main><footer>Exemplo fictício para a oficina. Arquivos estáticos • publicação manual.</footer></body></html>"};
+window.paginasOficina = nome => {
+ const resultado={};
+ for(const [arquivo,modelo] of Object.entries(modelosOficina)){
+  const d=new DOMParser().parseFromString(modelo,'text/html');
+  d.title=nome+' | '+d.title;
+  d.querySelector('header a').textContent=nome+' / PERFIL';
+  // As páginas auxiliares preservam seus estilos independentemente do tema do perfil.
+  d.querySelector('link[rel=stylesheet]').remove();
+  const s=d.createElement('style');s.textContent=":root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:#172b45;font:16px/1.65 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;-webkit-font-smoothing:antialiased}a{color:#365e84;text-underline-offset:4px}a:hover{color:#9d5b00}header,main,footer{max-width:1100px;margin:auto;padding:26px 30px}header{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-bottom:1px solid #e0e6ee;font-size:12px}header>a{font-weight:650;color:#172b45;text-decoration:none}nav{display:flex;gap:24px;flex-wrap:wrap}nav a{text-decoration:none;color:#6d7f93}main{padding-top:54px;padding-bottom:50px}.eyebrow{color:#99651c;font-size:10px;font-weight:650;letter-spacing:.13em}h1{font-size:clamp(36px,6vw,66px);font-weight:650;line-height:1.05;letter-spacing:-.055em;max-width:850px;margin:20px 0 26px}h2{font-size:23px;font-weight:600;letter-spacing:-.035em}p{max-width:740px;color:#6a7c91}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:32px}.card{padding:26px;border:1px solid #e0e6ee;border-radius:20px;background:#fff;box-shadow:0 10px 30px #172b4503}.badge{display:inline-block;background:#fff0d9;color:#965c09;padding:5px 12px;border-radius:9px;font-size:11px;font-weight:650}footer{border-top:1px solid #e0e6ee;color:#8492a5;font-size:11px}code{background:#e9eef4;color:#294864;border-radius:5px;padding:3px 6px;font-size:.85em}button,input{font:inherit}button{cursor:pointer;padding:12px 18px;border:0;border-radius:10px;background:#172b45;color:#fff}input{padding:12px;border-radius:10px;background:#fff;color:#172b45;border:1px solid #ccd6e2;width:100%}:focus-visible{outline:3px solid #4a94bd;outline-offset:4px}@media(max-width:600px){header,main,footer{padding:23px 20px}main{padding-top:35px}nav{gap:16px}h1{font-size:39px}}\n";d.head.append(s);
+  const palette=getComputedStyle(perfil);
+  const bg=palette.getPropertyValue('--profile-background').trim();
+  const ink=palette.getPropertyValue('--profile-text').trim();
+  const muted=palette.getPropertyValue('--profile-muted').trim();
+  const accent=palette.getPropertyValue('--accent').trim();
+  const shared=d.createElement('style');
+  shared.textContent='body{background:'+bg+';color:'+ink+'}p,footer,nav a{color:'+muted+'}header>a,a{color:'+ink+'}.card{background:color-mix(in srgb,'+ink+' 4%,'+bg+');border-color:color-mix(in srgb,'+ink+' 13%,transparent)}.eyebrow{color:'+muted+'}.badge{background:'+accent+';color:'+palette.getPropertyValue('--accent-ink').trim()+'}';
+  d.head.append(shared);
+  if(arquivo==='projetos.html'){
+   d.querySelector('h1').textContent=document.querySelector('#projectsHeading').textContent;
+   const destino=d.querySelector('.grid'); destino.replaceChildren();
+   document.querySelectorAll('#projectList .project-card').forEach(card=>{const c=d.importNode(card,true);c.classList.add('card');c.querySelectorAll('.editor-only').forEach(x=>x.remove());destino.append(c);});
+   if(!destino.children.length){const p=d.createElement('p');p.textContent='Meus projetos serão apresentados aqui.';destino.append(p);}
+  }
+  resultado[arquivo]='<!doctype html>\n'+d.documentElement.outerHTML;
+ }
+ resultado['VERSAO.txt']='Perfil de '+nome+'\nExportado em '+new Date().toISOString()+'\n';
+ return resultado;
+};
+const salvarBackup=document.createElement('button');salvarBackup.type='button';salvarBackup.className='button button-quiet';salvarBackup.textContent='Salvar projeto editável';salvarBackup.id='backupButton';
+const importarLabel=document.createElement('label');importarLabel.id='importLabel';importarLabel.className='button button-quiet';importarLabel.textContent='Importar projeto';
+const importar=document.createElement('input');importar.type='file';importar.accept='.html,text/html';importar.id='importProject';importar.style.maxWidth='180px';importarLabel.append(importar);
+document.querySelector('#projectTools').append(salvarBackup,importarLabel);
+importarLabel.tabIndex=0;importarLabel.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();importar.click();}});
+let urlBackup;
+salvarBackup.addEventListener('click',()=>{
+ if(imagensPendentes>0){avisar('Aguarde o carregamento das imagens antes de salvar.');return;}
+ const copia=document.documentElement.cloneNode(true);
+ const atuais=[...document.querySelectorAll('input,textarea,select')];
+ copia.querySelectorAll('input,textarea,select').forEach((el,i)=>{
+  const atual=atuais[i];if(el.type==='file'){el.removeAttribute('value');return;}
+  if(el.tagName==='TEXTAREA')el.textContent=atual.value;
+  else if(el.tagName==='SELECT')[...el.options].forEach((op,j)=>op.toggleAttribute('selected',atual.options[j].selected));
+  else {el.setAttribute('value',atual.value);if(el.type==='checkbox'||el.type==='radio')el.toggleAttribute('checked',atual.checked);}
+ });
+ copia.querySelector('#backupState')?.remove();
+ const state=document.createElement('script');state.id='backupState';state.type='application/json';
+ state.textContent=JSON.stringify({version:1,profile:document.querySelector('#profile').outerHTML}).replace(/</g,'\u003c');
+ copia.querySelector('body').prepend(state);
+ copia.querySelectorAll('#downloadReady,#backupReady,#importReady,#backupButton,#importLabel').forEach(x=>x.remove());
+ const ready=document.createElement('a');ready.className='button button-accent';ready.id='backupReady';ready.download='meu-projeto-editavel.html';ready.textContent='Salvar backup HTML';
+ if(urlBackup)URL.revokeObjectURL(urlBackup);urlBackup=URL.createObjectURL(new Blob(['<!doctype html>\n'+copia.outerHTML],{type:'text/html'}));ready.href=urlBackup;
+ document.querySelector('#backupReady')?.remove();document.querySelector('.studio-actions').append(ready);ready.click();
+ avisar('Backup pronto. Importe somente arquivos seus ou de fonte confiável.');
+});
+let urlImport;
+importar.addEventListener('change',async()=>{
+ const f=importar.files[0];if(!f)return;
+ if(f.size>80*1024*1024){avisar('Backup muito grande; limite de 80 MB.');return;}
+ try{
+  const texto=await f.text();const d=new DOMParser().parseFromString(texto,'text/html');
+  const state=JSON.parse(d.querySelector('#backupState')?.textContent||'null');
+  if(state?.version!==1||!state.profile)throw Error('Escolha um backup editável gerado nesta oficina.');
+  if(!confirm('Este backup HTML contém código executável. Abra somente um arquivo criado por você ou de fonte confiável. Continuar?'))return;
+  if(urlImport)URL.revokeObjectURL(urlImport);urlImport=URL.createObjectURL(new Blob([texto],{type:'text/html'}));
+  const a=document.createElement('a');a.href=urlImport;a.textContent='Abrir projeto importado';a.className='button button-accent';a.id='importReady';
+  document.querySelector('#importReady')?.remove();document.querySelector('.studio-actions').append(a);a.click();
+ }catch(e){avisar(e.message);}
+});
+const estadoSalvo=document.querySelector('#backupState');
+if(estadoSalvo){try{const s=JSON.parse(estadoSalvo.textContent);if(s.version===1){const d=new DOMParser().parseFromString(s.profile,'text/html');const p=d.querySelector('#profile');if(p){perfil.innerHTML=p.innerHTML;for(const a of [...perfil.attributes])perfil.removeAttribute(a.name);for(const a of p.attributes)perfil.setAttribute(a.name,a.value);perfil.querySelectorAll('.remove-button').forEach(b=>{b.addEventListener('click',()=>{b.parentElement.remove();atualizarContagens();avisar('Item removido.');});});atualizarIdentidade();atualizarContagens();}}}catch(e){avisar('Não foi possível restaurar o backup.');}}
+
+// Opções adicionais do portfólio. O estado visual permanece no perfil exportado.
+const portfolioControls = document.querySelector('#portfolioEnhancements');
+const hasPortfolioControls = Boolean(portfolioControls);
+if (!hasPortfolioControls) {
+  document.querySelector('.project-tools').insertAdjacentHTML('afterend', "<section id=\"portfolioEnhancements\" aria-label=\"Mais opções para seu portfólio\">\n  <details class=\"editor-section style-start\" open>\n    <summary><span>Escolha um ponto de partida</span><span class=\"accordion-icon\" aria-hidden=\"true\">+</span></summary>\n    <div class=\"editor-fields\"><p class=\"preset-hint\">Cada modelo muda a aparência. Seus textos, fotos e projetos continuam com você.</p>\n      <div class=\"theme-presets\" role=\"group\" aria-label=\"Modelos visuais\">\n        <button type=\"button\" data-theme=\"minimal\" aria-pressed=\"true\"><span class=\"theme-mini minimal\" aria-hidden=\"true\"><i></i><b>Aa</b><em></em></span><strong>Essencial</strong><small>Claro e equilibrado</small></button>\n        <button type=\"button\" data-theme=\"editorial\" aria-pressed=\"false\"><span class=\"theme-mini editorial\" aria-hidden=\"true\"><i></i><b>Aa</b><em></em></span><strong>Editorial</strong><small>Quente e expressivo</small></button>\n        <button type=\"button\" data-theme=\"terminal\" aria-pressed=\"false\"><span class=\"theme-mini terminal\" aria-hidden=\"true\"><i></i><b>Aa_</b><em></em></span><strong>Terminal</strong><small>Escuro e preciso</small></button>\n        <button type=\"button\" data-theme=\"aurora\" aria-pressed=\"false\"><span class=\"theme-mini aurora\" aria-hidden=\"true\"><i></i><b>Aa</b><em></em></span><strong>Aurora</strong><small>Noturno e criativo</small></button>\n      </div><p id=\"themeStatus\" class=\"preset-hint\" role=\"status\">Essencial é o ponto de partida. Você pode ajustar tudo depois.</p>\n    </div>\n  </details>\n  <details class=\"editor-section composition-options\">\n    <summary><span>Composição e seções</span><span class=\"accordion-icon\" aria-hidden=\"true\">+</span></summary>\n    <div class=\"editor-fields\">\n      <label for=\"heroLayoutInput\">Apresentação do perfil</label><select id=\"heroLayoutInput\"><option value=\"split\">Texto e foto lado a lado</option><option value=\"center\">Apresentação centralizada</option><option value=\"compact\">Cabeçalho compacto</option></select>\n      <label for=\"nameScaleInput\">Destaque do nome <output id=\"nameScaleValue\" for=\"nameScaleInput\">100%</output></label><input id=\"nameScaleInput\" type=\"range\" min=\"75\" max=\"130\" step=\"5\" value=\"100\">\n      <label for=\"densityInput\">Espaço entre as seções</label><select id=\"densityInput\"><option value=\"comfortable\">Confortável</option><option value=\"airy\">Mais espaço</option><option value=\"compact\">Mais compacto</option></select>\n      <label for=\"photoShapeInput\">Formato do retrato</label><select id=\"photoShapeInput\"><option value=\"soft\">Cantos suaves</option><option value=\"circle\">Circular</option><option value=\"square\">Quadrado</option></select>\n      <label class=\"checkbox-label\"><input id=\"showPortraitInput\" type=\"checkbox\" checked> Mostrar foto ou iniciais</label>\n      <p class=\"field-label\">Ordem e visibilidade das seções</p><p class=\"preset-hint\">Use as setas para mover. Desmarque o que não quiser mostrar.</p><div id=\"sectionOrder\" class=\"section-order\"></div>\n    </div>\n  </details>\n  <details class=\"editor-section section-copy-options\">\n    <summary><span>Títulos e textos da página</span><span class=\"accordion-icon\" aria-hidden=\"true\">+</span></summary>\n    <div class=\"editor-fields\">\n      <label for=\"collectionTitleInput\">Título da sua seleção</label><input id=\"collectionTitleInput\" data-profile-target=\"#collectionHeading\" maxlength=\"65\">\n      <label for=\"collectionDescriptionInput\">Apresentação da seleção</label><textarea id=\"collectionDescriptionInput\" data-profile-target=\".section-description\" maxlength=\"220\" rows=\"3\"></textarea>\n      <label for=\"projectsTitleInput\">Título dos projetos</label><input id=\"projectsTitleInput\" data-profile-target=\"#projectsHeading\" maxlength=\"65\">\n      <label for=\"stackTitleInput\">Título das tecnologias</label><input id=\"stackTitleInput\" data-profile-target=\"#languagesHeading\" maxlength=\"80\">\n      <label for=\"footerTextInput\">Frase de encerramento</label><input id=\"footerTextInput\" data-profile-target=\".profile-footer > span:first-child\" maxlength=\"100\">\n    </div>\n  </details>\n</section>\n");
+}
+const themes = {
+  minimal:{name:'Essencial',background:'#ffffff',accent:'#ff9900',font:'sans',pattern:'solid',layout:'split',shape:'soft',density:'comfortable',cards:'12px'},
+  editorial:{name:'Editorial',background:'#f7f0e5',accent:'#ab462f',font:'serif',pattern:'solid',layout:'center',shape:'circle',density:'airy',cards:'0px'},
+  terminal:{name:'Terminal',background:'#0b1720',accent:'#61d9bb',font:'mono',pattern:'grid',layout:'compact',shape:'square',density:'compact',cards:'0px'},
+  aurora:{name:'Aurora',background:'#19152b',accent:'#b8a0ff',font:'sans',pattern:'dots',layout:'center',shape:'soft',density:'airy',cards:'24px'}
+};
+let choosingTheme=false;
+function setControl(selector,value,event='change') {
+  const element=document.querySelector(selector);
+  element.value=value;element.dispatchEvent(new Event(event,{bubbles:true}));
+}
+function themeSelection(name) {
+  document.querySelectorAll('[data-theme]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.theme===name)));
+  document.querySelector('#themeStatus').textContent=themes[name]?themes[name].name+' aplicado. Ajuste as opções para criar sua própria versão.':'Aparência personalizada. Suas escolhas atuais estão no perfil.';
+}
+document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>{
+  const theme=themes[button.dataset.theme];choosingTheme=true;
+  setControl('#backgroundColorInput',theme.background,'input');aplicarCor(theme.accent);
+  setControl('#fontInput',theme.font);setControl('#backgroundInput',theme.pattern);setControl('#shapeInput',theme.cards);
+  setControl('#heroLayoutInput',theme.layout);setControl('#photoShapeInput',theme.shape);setControl('#densityInput',theme.density);
+  setControl('#nameScaleInput','100','input');
+  perfil.dataset.themeName=button.dataset.theme;perfil.dataset.themeBase=button.dataset.theme;themeSelection(button.dataset.theme);choosingTheme=false;
+  avisar('Modelo '+theme.name+' aplicado. Seu conteúdo foi mantido.');
+}));
+const visualInputs=['#accentInput','#backgroundColorInput','#fontInput','#shapeInput','#backgroundInput','#heroLayoutInput','#photoShapeInput','#densityInput','#nameScaleInput'];
+function markCustom(){if(!choosingTheme){perfil.dataset.themeName='custom';themeSelection('custom');}}
+for(const selector of visualInputs)document.querySelector(selector).addEventListener(['#accentInput','#backgroundColorInput','#nameScaleInput'].includes(selector)?'input':'change',markCustom);
+document.querySelectorAll('[data-accent]').forEach(button=>button.addEventListener('click',markCustom));
+document.querySelector('#heroLayoutInput').addEventListener('change',event=>perfil.dataset.hero=event.target.value);
+document.querySelector('#densityInput').addEventListener('change',event=>perfil.dataset.density=event.target.value);
+document.querySelector('#photoShapeInput').addEventListener('change',event=>perfil.dataset.photoShape=event.target.value);
+document.querySelector('#nameScaleInput').addEventListener('input',event=>{
+  perfil.style.setProperty('--name-scale',Number(event.target.value)/100);
+  document.querySelector('#nameScaleValue').textContent=event.target.value+'%';
+});
+document.querySelector('#showPortraitInput').addEventListener('change',event=>{
+  perfil.querySelector('.portrait-frame').hidden=!event.target.checked;
+  perfil.dataset.portrait=event.target.checked?'visible':'hidden';
+});
+document.querySelectorAll('[data-profile-target]').forEach(input=>{
+  const target=perfil.querySelector(input.dataset.profileTarget);
+  if(!hasPortfolioControls)input.value=target.textContent.replace(/\.$/,'');
+  input.addEventListener('input',()=>target.textContent=input.value);
+});
+const sectionDefinitions=[
+  {key:'languages',selector:'.languages-section',label:'Tecnologias'},
+  {key:'collection',selector:'.collection-section',label:'Minha seleção'},
+  {key:'projects',selector:'#projectsSection',label:'Projetos'}
+];
+function orderedSections(){return sectionDefinitions.slice().sort((a,b)=>{
+  const elements=[...perfil.children];return elements.indexOf(perfil.querySelector(a.selector))-elements.indexOf(perfil.querySelector(b.selector));
+});}
+function drawSectionOrder(){
+  const container=document.querySelector('#sectionOrder');container.replaceChildren();
+  const order=orderedSections();
+  order.forEach((section,index)=>{
+    const element=perfil.querySelector(section.selector);
+    const row=document.createElement('div');row.className='section-order-row';
+    const label=document.createElement('label');label.className='checkbox-label';
+    const check=document.createElement('input');check.type='checkbox';check.checked=!element.hidden;check.dataset.sectionToggle=section.key;
+    check.addEventListener('change',()=>{element.hidden=!check.checked;if(section.key==='projects')document.querySelector('#showProjects').checked=check.checked;});
+    label.append(check,document.createTextNode(section.label));row.append(label);
+    for(const [direction,arrow] of [[-1,'↑'],[1,'↓']]){
+      const button=document.createElement('button');button.type='button';button.textContent=arrow;button.dataset.move=section.key+':'+direction;
+      button.setAttribute('aria-label','Mover '+section.label+' para '+(direction<0?'cima':'baixo'));
+      button.disabled=index+direction<0||index+direction>=order.length;
+      button.addEventListener('click',()=>{
+        const other=perfil.querySelector(order[index+direction].selector);
+        if(direction<0)perfil.insertBefore(element,other);else perfil.insertBefore(other,element);
+        drawSectionOrder();const moved=document.querySelector('[data-move="'+section.key+':'+direction+'"]');const focus=moved.disabled?document.querySelector('[data-move="'+section.key+':'+(-direction)+'"]'):moved;focus.focus({preventScroll:true});
+      });row.append(button);
+    }
+    container.append(row);
+  });
+}
+document.querySelector('#showProjects').addEventListener('change',drawSectionOrder);
+drawSectionOrder();themeSelection(perfil.dataset.themeName||'minimal');
+document.querySelector('#nameScaleValue').textContent=document.querySelector('#nameScaleInput').value+'%';
+</script></body>
+</html>

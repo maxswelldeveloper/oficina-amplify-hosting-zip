@@ -1,0 +1,7 @@
+Os arquivos JSON são conjuntos completos de regras para um aplicativo de laboratório.
+Antes de aplicar: copie/exporte as regras atuais. Substitua o conjunto no editor do Amplify, sem duplicar o fallback existente. Não cole isso em uma aplicação de produção alheia ao laboratório.
+Regra 404: fallback de recurso inexistente. Recursos reais como /style.css devem continuar sendo servidos. Diferente de uma reescrita 200 universal.
+Não confunda 404 com 404-200. Teste status e corpo na AWS.
+customHttp.yml deve entrar na raiz do ZIP ao lado de index.html; o pacote com cabeçalhos já contém esse arquivo. O arquivo prevalece sobre Custom headers no console. Após mudar cabeçalhos, publique novamente.
+As regras JSON são aplicadas no console; colocá-las no ZIP não as configura automaticamente.
+301 pode ficar armazenado no navegador. Teste alterações com cache desabilitado ou uma sessão limpa.

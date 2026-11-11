@@ -1,0 +1,34 @@
+<section id="portfolioEnhancements" aria-label="Mais opções para seu portfólio">
+  <details class="editor-section style-start" open>
+    <summary><span>Escolha um ponto de partida</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+    <div class="editor-fields"><p class="preset-hint">Cada modelo muda a aparência. Seus textos, fotos e projetos continuam com você.</p>
+      <div class="theme-presets" role="group" aria-label="Modelos visuais">
+        <button type="button" data-theme="minimal" aria-pressed="true"><span class="theme-mini minimal" aria-hidden="true"><i></i><b>Aa</b><em></em></span><strong>Essencial</strong><small>Claro e equilibrado</small></button>
+        <button type="button" data-theme="editorial" aria-pressed="false"><span class="theme-mini editorial" aria-hidden="true"><i></i><b>Aa</b><em></em></span><strong>Editorial</strong><small>Quente e expressivo</small></button>
+        <button type="button" data-theme="terminal" aria-pressed="false"><span class="theme-mini terminal" aria-hidden="true"><i></i><b>Aa_</b><em></em></span><strong>Terminal</strong><small>Escuro e preciso</small></button>
+        <button type="button" data-theme="aurora" aria-pressed="false"><span class="theme-mini aurora" aria-hidden="true"><i></i><b>Aa</b><em></em></span><strong>Aurora</strong><small>Noturno e criativo</small></button>
+      </div><p id="themeStatus" class="preset-hint" role="status">Essencial é o ponto de partida. Você pode ajustar tudo depois.</p>
+    </div>
+  </details>
+  <details class="editor-section composition-options">
+    <summary><span>Composição e seções</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+    <div class="editor-fields">
+      <label for="heroLayoutInput">Apresentação do perfil</label><select id="heroLayoutInput"><option value="split">Texto e foto lado a lado</option><option value="center">Apresentação centralizada</option><option value="compact">Cabeçalho compacto</option></select>
+      <label for="nameScaleInput">Destaque do nome <output id="nameScaleValue" for="nameScaleInput">100%</output></label><input id="nameScaleInput" type="range" min="75" max="130" step="5" value="100">
+      <label for="densityInput">Espaço entre as seções</label><select id="densityInput"><option value="comfortable">Confortável</option><option value="airy">Mais espaço</option><option value="compact">Mais compacto</option></select>
+      <label for="photoShapeInput">Formato do retrato</label><select id="photoShapeInput"><option value="soft">Cantos suaves</option><option value="circle">Circular</option><option value="square">Quadrado</option></select>
+      <label class="checkbox-label"><input id="showPortraitInput" type="checkbox" checked> Mostrar foto ou iniciais</label>
+      <p class="field-label">Ordem e visibilidade das seções</p><p class="preset-hint">Use as setas para mover. Desmarque o que não quiser mostrar.</p><div id="sectionOrder" class="section-order"></div>
+    </div>
+  </details>
+  <details class="editor-section section-copy-options">
+    <summary><span>Títulos e textos da página</span><span class="accordion-icon" aria-hidden="true">+</span></summary>
+    <div class="editor-fields">
+      <label for="collectionTitleInput">Título da sua seleção</label><input id="collectionTitleInput" data-profile-target="#collectionHeading" maxlength="65">
+      <label for="collectionDescriptionInput">Apresentação da seleção</label><textarea id="collectionDescriptionInput" data-profile-target=".section-description" maxlength="220" rows="3"></textarea>
+      <label for="projectsTitleInput">Título dos projetos</label><input id="projectsTitleInput" data-profile-target="#projectsHeading" maxlength="65">
+      <label for="stackTitleInput">Título das tecnologias</label><input id="stackTitleInput" data-profile-target="#languagesHeading" maxlength="80">
+      <label for="footerTextInput">Frase de encerramento</label><input id="footerTextInput" data-profile-target=".profile-footer > span:first-child" maxlength="100">
+    </div>
+  </details>
+</section>

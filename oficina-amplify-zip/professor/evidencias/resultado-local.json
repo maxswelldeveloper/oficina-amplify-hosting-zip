@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-11-11T20:05:19.501Z",
+  "result": "PASS",
+  "checks": [
+    "5 etapas",
+    "15 momentos Entender/Fazer/Conferir em mobile",
+    "abas por teclado",
+    "simulação específica/conflito/404/arquivo real",
+    "investigação integrada às regras e consulta opcional de acessos",
+    "comparação v2/v1",
+    "anotações persistentes",
+    "download material",
+    "guia",
+    "editor",
+    "JPG",
+    "projeto",
+    "ZIP nome aleatório",
+    "backup/importação/edição/remoção",
+    "sem overflow mobile",
+    "sem requisições HTTP",
+    "sem erros JS",
+    "PDFs"
+  ],
+  "browser": "158.0.8127.18",
+  "errors": [],
+  "requests": []
+}
