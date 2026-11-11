@@ -4,6 +4,7 @@ Executada localmente em 11/11/2026, com Chromium por Playwright. Veja professor/
 
 ## Verificações concluídas
 
+- ZIP final do portfólio sem a navegação automática Perfil/Projetos/Contato, inclusive nas páginas auxiliares personalizadas. Os sites de exemplo da prática mantêm sua navegação.
 - Remoção da etapa independente de investigação, renumeração de atualização/personalização e migração das anotações anteriores para as novas posições.
 - Guia e roteiro sincronizados para 60/90 minutos, com 20/30 minutos de personalização.
 

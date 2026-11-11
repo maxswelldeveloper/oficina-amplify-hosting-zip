@@ -256,13 +256,6 @@ editor_css = (BASE/'style.css').read_text() + (OUT/'fontes/editor-design.css').r
 
 editor_script = (BASE/'script.js').read_text()
 extra = {'projetos.html':projects, 'contato.html':contact, '404.html':error, 'especial.html':special}
-editor_script = editor_script.replace('pagina.body.append(copia);', '''const navegacao = pagina.createElement("nav");
-  navegacao.setAttribute("aria-label", "Páginas do perfil");
-  navegacao.style.cssText="display:flex;gap:20px;flex-wrap:wrap;padding:20px;justify-content:center";
-  for(const [href, texto] of [["index.html","Perfil"],["projetos.html","Projetos"],["contato.html","Contato"]]){
-    const a=pagina.createElement("a"); a.href=href;a.textContent=texto;a.style.color="inherit";navegacao.append(a);
-  }
-  pagina.body.append(navegacao,copia);''')
 editor_script = editor_script.replace('{ nome: "style.css", conteudo: css },', '''{ nome: "style.css", conteudo: css },
       ...Object.entries(window.paginasOficina(nome)).map(([nome,conteudo])=>({nome,conteudo})),''')
 extension = '''
@@ -274,6 +267,7 @@ window.paginasOficina = nome => {
   const d=new DOMParser().parseFromString(modelo,'text/html');
   d.title=nome+' | '+d.title;
   d.querySelector('header a').textContent=nome+' / PERFIL';
+  d.querySelector('header nav')?.remove();
   // As páginas auxiliares preservam seus estilos independentemente do tema do perfil.
   d.querySelector('link[rel=stylesheet]').remove();
   const s=d.createElement('style');s.textContent=CSSLAB;d.head.append(s);
